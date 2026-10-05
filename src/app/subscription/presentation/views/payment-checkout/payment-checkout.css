@@ -18,7 +18,7 @@
 }
 
 .checkout-summary h2 {
-  margin: 0.15rem 0 0;
+  margin: 0.15rem 0 0.5rem;
 }
 
 .checkout-price {
@@ -32,6 +32,7 @@
   color: var(--color-primary-dark);
   font-size: 2rem;
   font-weight: 800;
+  line-height: 1.1;
 }
 
 .checkout-price .period {
