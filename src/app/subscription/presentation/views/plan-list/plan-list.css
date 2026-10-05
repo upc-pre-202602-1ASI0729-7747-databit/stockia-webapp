@@ -8,6 +8,10 @@
   gap: 1.25rem;
 }
 
+.plans-subscription {
+  margin-bottom: 1.5rem;
+}
+
 .plans-error {
   margin-bottom: 1rem;
   font-size: 0.88rem;
