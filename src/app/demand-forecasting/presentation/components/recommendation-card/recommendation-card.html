@@ -1,0 +1,31 @@
+<article class="card recommendation-card" [class.recommendation-applied]="recommendation().applied">
+  <span
+    class="badge"
+    [class.badge-warning]="recommendation().type === 'PURCHASE_SUGGESTION'"
+    [class.badge-success]="recommendation().type === 'MENU_ADJUSTMENT'"
+  >
+    {{ recommendation().typeLabel() }}
+  </span>
+
+  <p class="recommendation-message">{{ recommendation().message }}</p>
+
+  <p class="recommendation-impact">
+    <span class="recommendation-impact-label">Impacto esperado:</span>
+    {{ recommendation().expectedImpact }}
+  </p>
+
+  <div class="recommendation-actions">
+    @if (recommendation().applied) {
+      <span class="badge badge-success" role="status">✓ Aplicada</span>
+    } @else {
+      <button
+        type="button"
+        class="btn btn-secondary"
+        [disabled]="disabled() || applying()"
+        (click)="apply.emit()"
+      >
+        {{ applying() ? 'Aplicando…' : 'Aplicar' }}
+      </button>
+    }
+  </div>
+</article>
