@@ -16,6 +16,11 @@ export const routes: Routes = [
   //   loadChildren: () =>
   //     import('./inventory/presentation/inventory.routes').then((m) => m.inventoryRoutes),
   // },
+  {
+    path: 'subscription',
+    loadChildren: () =>
+      import('./subscription/presentation/subscription.routes').then((m) => m.subscriptionRoutes),
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Página no encontrada` },
 ];
