@@ -26,6 +26,7 @@ export class Layout {
   /** Navigation options rendered in the sidebar. */
   protected readonly options: NavigationOption[] = [
     { link: '/home', label: 'Inicio', icon: 'home' },
+    { link: '/subscription', label: 'Planes y suscripción', icon: 'credit_card' },
     // Each team member adds the navigation option of their bounded context here, e.g.:
     // { link: '/inventory', label: 'Inventario', icon: 'inventory_2' },
   ];
