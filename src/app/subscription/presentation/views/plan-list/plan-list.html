@@ -15,6 +15,16 @@
   <p class="form-error plans-error" role="alert">{{ error }}</p>
 }
 
+@if (store.currentSubscription(); as subscription) {
+  <app-current-subscription-card
+    class="plans-subscription"
+    [subscription]="subscription"
+    [processing]="store.processing()"
+    (renew)="onRenew()"
+    (cancel)="onCancel()"
+  />
+}
+
 @if (store.plans().length > 0) {
   <section class="plans-grid" aria-label="Planes disponibles">
     @for (plan of store.plans(); track plan.id) {
