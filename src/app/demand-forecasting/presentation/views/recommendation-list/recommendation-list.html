@@ -1,0 +1,35 @@
+<header class="page-header">
+  <div>
+    <h1>Recomendaciones automáticas</h1>
+    <p>Sugerencias de ajuste de menú y de compras según la demanda proyectada y la temporada.</p>
+  </div>
+  @if (store.pendingRecommendations().length > 0) {
+    <span class="badge badge-warning">
+      {{ store.pendingRecommendations().length }} por aplicar
+    </span>
+  }
+</header>
+
+@if (store.error(); as error) {
+  <p class="form-error recommendations-error" role="alert">{{ error }}</p>
+}
+
+@if (store.recommendations().length > 0) {
+  <section class="recommendations-grid" aria-label="Recomendaciones">
+    @for (recommendation of store.recommendations(); track recommendation.id) {
+      <app-recommendation-card
+        [recommendation]="recommendation"
+        [applying]="store.applyingId() === recommendation.id"
+        [disabled]="store.applyingId() !== null"
+        (apply)="onApply(recommendation.id)"
+      />
+    }
+  </section>
+} @else if (store.loading()) {
+  <div class="empty-state" role="status">
+    <p>Cargando recomendaciones…</p>
+    <p class="recommendations-hint">La primera carga puede tardar hasta un minuto.</p>
+  </div>
+} @else if (!store.error()) {
+  <div class="card empty-state">No hay recomendaciones por ahora.</div>
+}
