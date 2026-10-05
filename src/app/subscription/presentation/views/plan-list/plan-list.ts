@@ -3,6 +3,7 @@ import { SubscriptionStore } from '../../../application/subscription.store';
 import { PaymentMethod } from '../../../domain/model/payment-method';
 import { Plan } from '../../../domain/model/plan.entity';
 import { SubscribeToPlanCommand } from '../../../domain/model/subscribe-to-plan.command';
+import { CurrentSubscriptionCard } from '../../components/current-subscription-card/current-subscription-card';
 import { PlanCard } from '../../components/plan-card/plan-card';
 
 /** Time the activation confirmation stays visible, in milliseconds. */
@@ -10,7 +11,7 @@ const ACTIVATION_NOTICE_MS = 2500;
 
 /** "Planes y suscripción" page: plan catalog with simulated payment. */
 @Component({
-  imports: [PlanCard],
+  imports: [CurrentSubscriptionCard, PlanCard],
   selector: 'app-plan-list',
   styleUrl: './plan-list.css',
   templateUrl: './plan-list.html',
@@ -60,6 +61,16 @@ export class PlanList implements OnInit {
     if (activated) {
       this.showActivationNotice(plan.id);
     }
+  }
+
+  /** Renews the current subscription for another billing period. */
+  protected onRenew(): void {
+    void this.store.renewSubscription();
+  }
+
+  /** Cancels the current subscription. */
+  protected onCancel(): void {
+    void this.store.cancelSubscription();
   }
 
   /**

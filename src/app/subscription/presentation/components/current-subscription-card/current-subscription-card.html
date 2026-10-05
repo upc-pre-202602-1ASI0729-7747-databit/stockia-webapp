@@ -1,0 +1,38 @@
+<section class="card subscription-card" aria-labelledby="current-subscription-title">
+  <header class="subscription-header">
+    <div>
+      <span class="subscription-eyebrow" id="current-subscription-title">Tu suscripción</span>
+      <h2 class="subscription-plan">{{ planName() }}</h2>
+    </div>
+    <span class="badge" [class]="statusBadge()">{{ statusLabel() }}</span>
+  </header>
+
+  <dl class="subscription-details">
+    <div>
+      <dt>Fecha de renovación</dt>
+      <dd>{{ subscription().renewalDate | date: 'dd/MM/yyyy' }}</dd>
+    </div>
+    <div>
+      <dt>Días restantes</dt>
+      <dd>{{ remainingDays() }}</dd>
+    </div>
+    <div>
+      <dt>Método de pago</dt>
+      <dd>{{ paymentMethodLabel() }}</dd>
+    </div>
+  </dl>
+
+  <div class="subscription-actions">
+    <button type="button" class="btn btn-primary" [disabled]="processing()" (click)="renew.emit()">
+      Renovar
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      [disabled]="processing() || cancelled()"
+      (click)="cancel.emit()"
+    >
+      Cancelar suscripción
+    </button>
+  </div>
+</section>
