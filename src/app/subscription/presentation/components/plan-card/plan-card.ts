@@ -1,9 +1,11 @@
 import { Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { PaymentMethod } from '../../../domain/model/payment-method';
 import { Plan } from '../../../domain/model/plan.entity';
 
 /** Card presenting a plan with its price, features and payment actions. */
 @Component({
+  imports: [RouterLink],
   selector: 'app-plan-card',
   styleUrl: './plan-card.css',
   templateUrl: './plan-card.html',
