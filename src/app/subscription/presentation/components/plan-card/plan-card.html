@@ -1,0 +1,41 @@
+<article class="card plan-card" [class.plan-highlighted]="plan().highlighted">
+  @if (plan().highlighted) {
+    <span class="badge badge-warning plan-tag">Más popular</span>
+  }
+
+  <h3>{{ plan().name }}</h3>
+
+  <p class="plan-price">
+    <span class="amount">{{ plan().formattedPrice() }}</span>
+    <span class="period">/mes</span>
+  </p>
+
+  <ul class="plan-features">
+    @for (feature of plan().features; track feature) {
+      <li>{{ feature }}</li>
+    }
+  </ul>
+
+  <div class="plan-actions">
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="disabled() || processingMethod() !== null"
+      (click)="pay.emit('STRIPE')"
+    >
+      {{ processingMethod() === 'STRIPE' ? 'Procesando…' : 'Pagar con Stripe' }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [disabled]="disabled() || processingMethod() !== null"
+      (click)="pay.emit('PAYPAL')"
+    >
+      {{ processingMethod() === 'PAYPAL' ? 'Procesando…' : 'Pagar con PayPal' }}
+    </button>
+
+    @if (activated()) {
+      <span class="badge badge-success plan-activated" role="status">✓ Suscripción activada</span>
+    }
+  </div>
+</article>
