@@ -1,0 +1,70 @@
+<header class="page-header">
+  <div>
+    <h1>Confirmar pago</h1>
+    <p>Revisa tu plan y elige cómo pagar. Pago simulado — no se procesan cobros reales.</p>
+  </div>
+</header>
+
+@if (plan(); as plan) {
+  <section class="card checkout-card">
+    <div class="checkout-summary">
+      <span class="checkout-eyebrow">Plan elegido</span>
+      <h2>{{ plan.name }}</h2>
+      <p class="checkout-price">
+        <span class="amount">{{ plan.formattedPrice() }}</span>
+        <span class="period">/mes</span>
+      </p>
+      <ul class="checkout-features">
+        @for (feature of plan.features; track feature) {
+          <li>{{ feature }}</li>
+        }
+      </ul>
+    </div>
+
+    <fieldset class="checkout-methods">
+      <legend>Método de pago</legend>
+      @for (option of methods; track option.value) {
+        <label class="method-option" [class.selected]="method() === option.value">
+          <input
+            type="radio"
+            name="payment-method"
+            [value]="option.value"
+            [checked]="method() === option.value"
+            [disabled]="store.processing()"
+            (change)="method.set(option.value)"
+          />
+          <span>
+            <span class="method-label">{{ option.label }}</span>
+            <span class="method-hint">{{ option.hint }}</span>
+          </span>
+        </label>
+      }
+    </fieldset>
+
+    @if (store.error(); as error) {
+      <p class="form-error" role="alert">{{ error }}</p>
+    }
+
+    <div class="checkout-actions">
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="store.processing()"
+        (click)="onConfirm()"
+      >
+        {{ store.processing() ? 'Procesando…' : 'Confirmar pago' }}
+      </button>
+      <a class="btn btn-ghost" routerLink="../../plans">Volver</a>
+    </div>
+  </section>
+} @else if (store.loading()) {
+  <div class="empty-state" role="status">
+    <p>Cargando el plan…</p>
+    <p class="checkout-hint">La primera carga puede tardar hasta un minuto.</p>
+  </div>
+} @else {
+  <div class="empty-state">
+    <p>{{ store.error() ?? 'No encontramos el plan que elegiste.' }}</p>
+    <a class="btn btn-ghost" routerLink="../../plans">Volver</a>
+  </div>
+}
