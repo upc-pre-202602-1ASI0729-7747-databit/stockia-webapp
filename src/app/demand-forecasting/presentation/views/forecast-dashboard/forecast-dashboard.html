@@ -1,0 +1,62 @@
+<header class="page-header">
+  <div>
+    <h1>Predicción de demanda</h1>
+    <p>
+      Proyección de ventas por plato para los próximos 7 días, combinando el histórico de ventas y
+      el clima. Modelo simulado — aún no hay un backend de Machine Learning.
+    </p>
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="store.generating()"
+    (click)="onGenerate()"
+  >
+    {{ store.generating() ? 'Generando…' : 'Generar nueva predicción' }}
+  </button>
+</header>
+
+@if (store.error(); as error) {
+  <p class="form-error forecast-error" role="alert">{{ error }}</p>
+}
+
+@if (store.latestForecast(); as forecast) {
+  <section class="grid-stats" aria-label="Resumen de la predicción">
+    <article class="card forecast-stat">
+      <p>Confianza del modelo</p>
+      <strong>{{ forecast.confidencePercentage() }}%</strong>
+    </article>
+    <article class="card forecast-stat">
+      <p>Condición climática</p>
+      <strong>{{ forecast.weatherCondition }}</strong>
+    </article>
+    <article class="card forecast-stat">
+      <p>Unidades proyectadas</p>
+      <strong>{{ forecast.totalProjectedUnits() }}</strong>
+    </article>
+    <article class="card forecast-stat">
+      <p>Día de mayor demanda</p>
+      <strong>{{ forecast.peakDataPoint()?.dayLabel ?? '—' }}</strong>
+      <span class="forecast-stat-detail">{{ forecast.peakDataPoint()?.dishName }}</span>
+    </article>
+  </section>
+
+  <section class="card">
+    <div class="forecast-chart-header">
+      <h2>Unidades proyectadas por día</h2>
+      <span class="badge badge-muted">
+        Generada {{ forecast.generatedAt | date: 'dd/MM/yyyy HH:mm' }}
+      </span>
+    </div>
+    <app-forecast-chart [forecast]="forecast" />
+  </section>
+} @else if (store.loading()) {
+  <div class="empty-state" role="status">
+    <p>Cargando predicciones…</p>
+    <p class="forecast-hint">La primera carga puede tardar hasta un minuto.</p>
+  </div>
+} @else if (!store.error()) {
+  <div class="card empty-state">
+    Aún no hay predicciones generadas. Usa el botón «Generar nueva predicción».
+  </div>
+}

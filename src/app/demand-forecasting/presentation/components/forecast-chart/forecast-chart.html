@@ -1,0 +1,23 @@
+<ol class="chart" aria-label="Unidades proyectadas por día">
+  @for (bar of bars(); track bar.point.date) {
+    <li
+      class="chart-column"
+      [attr.aria-label]="
+        bar.point.dayLabel +
+        ' ' +
+        bar.point.date +
+        ': ' +
+        bar.point.projectedUnits +
+        ' unidades de ' +
+        bar.point.dishName
+      "
+    >
+      <span class="chart-value" aria-hidden="true">{{ bar.point.projectedUnits }}</span>
+      <div class="chart-track" aria-hidden="true">
+        <div class="chart-bar" [style.height.%]="bar.heightPercentage"></div>
+      </div>
+      <span class="chart-day" aria-hidden="true">{{ bar.point.dayLabel }}</span>
+      <span class="chart-dish" aria-hidden="true">{{ bar.point.dishName }}</span>
+    </li>
+  }
+</ol>

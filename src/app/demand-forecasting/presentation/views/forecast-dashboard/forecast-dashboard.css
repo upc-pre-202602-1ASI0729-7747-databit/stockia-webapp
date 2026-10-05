@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.forecast-error {
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.forecast-stat p {
+  margin: 0 0 0.25rem;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.forecast-stat strong {
+  display: block;
+  color: var(--color-primary-dark);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.forecast-stat-detail {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.forecast-chart-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.forecast-chart-header h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.forecast-hint {
+  font-size: 0.82rem;
+}
