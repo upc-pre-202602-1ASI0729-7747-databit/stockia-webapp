@@ -33,6 +33,8 @@ export class SubscriptionStore {
   private readonly plansSignal = signal<Plan[]>([]);
   /** Subscription of the restaurant, as stored in the API. */
   private readonly subscriptionSignal = signal<Subscription | null>(null);
+  /** Whether the subscription was read from the API at least once. */
+  private readonly subscriptionLoadedSignal = signal(false);
   /** Number of load requests in flight. */
   private readonly pendingLoadsSignal = signal(0);
   /** Whether a payment, renewal or cancellation is in flight. */
@@ -91,17 +93,25 @@ export class SubscriptionStore {
     );
     if (subscriptions) {
       this.subscriptionSignal.set(subscriptions[0] ?? null);
+      this.subscriptionLoadedSignal.set(true);
     }
   }
 
   /**
    * Subscribes the restaurant to a plan.
    * Moves the current subscription to the plan, or creates one when there is none.
+   * The subscription is read first when it is still unknown, so an existing one is never duplicated.
    *
    * @param command - Plan and payment method chosen by the user.
    * @returns `true` when the subscription was saved.
    */
-  subscribeToPlan(command: SubscribeToPlanCommand): Promise<boolean> {
+  async subscribeToPlan(command: SubscribeToPlanCommand): Promise<boolean> {
+    if (!this.subscriptionLoadedSignal()) {
+      await this.loadCurrentSubscription();
+      if (!this.subscriptionLoadedSignal()) {
+        return false;
+      }
+    }
     const current = this.subscriptionSignal();
     if (current) {
       const subscription = copySubscription(current);

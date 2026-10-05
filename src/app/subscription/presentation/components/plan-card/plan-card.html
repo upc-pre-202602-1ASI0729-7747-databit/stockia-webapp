@@ -33,6 +33,9 @@
     >
       {{ processingMethod() === 'PAYPAL' ? 'Procesando…' : 'Pagar con PayPal' }}
     </button>
+    <a class="btn btn-ghost plan-review" [routerLink]="['../checkout', plan().id]">
+      Ver resumen del pago
+    </a>
 
     @if (activated()) {
       <span class="badge badge-success plan-activated" role="status">✓ Suscripción activada</span>

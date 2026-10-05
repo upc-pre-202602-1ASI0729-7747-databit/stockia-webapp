@@ -64,6 +64,10 @@
   gap: 0.5rem;
 }
 
+.plan-review {
+  text-decoration: none;
+}
+
 .plan-activated {
   align-self: center;
 }

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { PaymentMethod } from '../../../domain/model/payment-method';
 import { Plan } from '../../../domain/model/plan.entity';
 import { PlanCard } from './plan-card';
@@ -8,6 +9,7 @@ describe('PlanCard', () => {
   let element: HTMLElement;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
     fixture = TestBed.createComponent(PlanCard);
     fixture.componentRef.setInput(
       'plan',
