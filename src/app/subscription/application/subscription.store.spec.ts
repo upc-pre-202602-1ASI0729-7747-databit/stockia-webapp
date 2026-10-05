@@ -21,6 +21,9 @@ const subscriptionResource = {
   paymentMethod: 'STRIPE',
 };
 
+/** Waits for the pending promise callbacks to run. */
+const settle = () => new Promise((resolve) => setTimeout(resolve));
+
 describe('SubscriptionStore', () => {
   let store: SubscriptionStore;
   let http: HttpTestingController;
@@ -99,6 +102,29 @@ describe('SubscriptionStore', () => {
 
     expect(await saved).toBe(true);
     expect(store.currentSubscription()?.id).toBe(7);
+  });
+
+  it('should read the subscription before subscribing when it is still unknown', async () => {
+    const saved = store.subscribeToPlan(
+      new SubscribeToPlanCommand({ planId: 2, paymentMethod: 'PAYPAL' }),
+    );
+    http.expectOne(subscriptionsUrl).flush([subscriptionResource]);
+    await settle();
+    const request = http.expectOne(`${subscriptionsUrl}/1`);
+    expect(request.request.method).toBe('PUT');
+    request.flush(request.request.body);
+
+    expect(await saved).toBe(true);
+  });
+
+  it('should not subscribe when the subscription cannot be read', async () => {
+    const saved = store.subscribeToPlan(
+      new SubscribeToPlanCommand({ planId: 2, paymentMethod: 'PAYPAL' }),
+    );
+    http.expectOne(subscriptionsUrl).flush('boom', { status: 500, statusText: 'Server Error' });
+
+    expect(await saved).toBe(false);
+    expect(store.error()).toContain('No se pudo cargar la suscripción');
   });
 
   it('should cancel and renew the current subscription', async () => {
