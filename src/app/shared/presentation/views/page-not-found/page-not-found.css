@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.not-found-card {
+  max-width: 460px;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.not-found-card code {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
