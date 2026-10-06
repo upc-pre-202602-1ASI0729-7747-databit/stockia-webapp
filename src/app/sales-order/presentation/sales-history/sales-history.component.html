@@ -1,0 +1,52 @@
+<div class="page-header">
+  <div>
+    <h1>Historial de ventas</h1>
+    <p>Recopila y conserva el histórico real de ventas confirmadas (US27), base de la que la Predicción de demanda con IA aprende para mejorar sus proyecciones.</p>
+  </div>
+</div>
+
+<div class="grid-stats" style="margin-bottom:1.5rem;">
+  <div class="card">
+    <p>Ventas registradas</p>
+    <h2>{{ sales.sales().length }}</h2>
+  </div>
+  <div class="card">
+    <p>Ingresos totales del período</p>
+    <h2 [style.color]="'var(--color-success, #16A34A)'">S/ {{ sales.totalRevenue() | number: '1.2-2' }}</h2>
+  </div>
+</div>
+
+<div class="card">
+  @if (sales.sales().length === 0) {
+    <div class="empty-state">Aún no hay ventas registradas. Usa "Simular venta" en Recetas para generar la primera.</div>
+  } @else {
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Canal</th>
+          <th>Platos vendidos</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (sale of sales.sales(); track sale.id) {
+          <tr>
+            <td>{{ sale.saleDate | date: 'short' }}</td>
+            <td>{{ channelLabel[sale.channel] }}</td>
+            <td>{{ dishesSummary(sale) }}</td>
+            <td><strong>S/ {{ sale.total | number: '1.2-2' }}</strong></td>
+            <td><span [class]="statusClass(sale.status)">{{ statusLabel[sale.status] }}</span></td>
+            <td style="text-align:right; white-space:nowrap;">
+              @if (sale.status !== SaleStatus.VOIDED) {
+                <button class="btn btn-ghost" (click)="voidSale(sale.id)">Anular</button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
