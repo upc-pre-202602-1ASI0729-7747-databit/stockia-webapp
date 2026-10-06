@@ -7,13 +7,13 @@ import { StockStatus, STOCK_STATUS_LABEL} from '../../product-inventory/domain/i
 import { DemandForecastingStore } from '../../demand-forecasting/application/demand-forecasting.store';
 
 @Component({
-  selector: 'app-analitics-dashboard',
+  selector: 'app-analytics-dashboard',
   imports: [CommonModule],
-  templateUrl: './analitics-dashboard.html',
+  templateUrl: './analytics-dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './analitics-dashboard.css',
+  styleUrl: './analytics-dashboard.css',
 })
-export class BusinessDashboardComponent implements OnInit {
+export class AnalyticsDashboardComponent implements OnInit {
   inventory = inject(InventoryService);
   alertsSrv = inject(AlertsService);
   forecast = inject(DemandForecastingStore);
@@ -25,7 +25,7 @@ export class BusinessDashboardComponent implements OnInit {
   ngOnInit() {
     this.inventory.loadItems().subscribe();
     this.alertsSrv.loadAlerts().subscribe();
-    this.forecast.loadForecasts();
+    this.forecast.loadForecasts().then();
   }
 
   get criticalItems() {
