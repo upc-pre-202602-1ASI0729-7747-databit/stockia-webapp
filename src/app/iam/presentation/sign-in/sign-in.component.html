@@ -16,7 +16,7 @@
   <main class="auth-main">
     <form class="card auth-card" [formGroup]="form" (ngSubmit)="submit()">
       <h2>Iniciar sesión</h2>
-      <p class="subtitle">Accede a tu panel de StockIA (US30)</p>
+      <p class="subtitle">Accede a tu panel de StockIA</p>
 
       @if (errorMessage()) {
         <p class="form-error" style="margin-bottom:1rem">{{ errorMessage() }}</p>
