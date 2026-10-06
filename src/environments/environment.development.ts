@@ -11,4 +11,6 @@ export const environment = {
   platformProviderInventoryItemsEndpointPath: '/inventoryItems',
   platformProviderRecipesEndpointPath: '/recipes',
   platformProviderSalesEndpointPath: '/sales',
+  ///
+  apiBaseUrl: 'https://stockia-mock-api.onrender.com/api/v1',
 };
