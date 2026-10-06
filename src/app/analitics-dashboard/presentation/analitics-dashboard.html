@@ -64,11 +64,11 @@
   </div>
 </div>
 
-@if (forecast.latest()) {
+@if (forecast.latestForecast()) {
   <div class="card" style="margin-top:1.5rem;">
     <h3>Demanda proyectada (IA) — próximos días</h3>
     <div class="mini-chart">
-      @for (point of forecast.latest()!.dataPoints; track point.date) {
+      @for (point of forecast.latestForecast()!.dataPoints; track point.date) {
         <div class="mini-col">
           <div class="mini-bar" [style.height.px]="point.projectedUnits / 1.5"></div>
           <span>{{ point.dayLabel }}</span>

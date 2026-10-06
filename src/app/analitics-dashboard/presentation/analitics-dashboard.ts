@@ -7,11 +7,11 @@ import { StockStatus, STOCK_STATUS_LABEL} from '../../product-inventory/domain/i
 import { DemandForecastingStore } from '../../demand-forecasting/application/demand-forecasting.store';
 
 @Component({
-  selector: 'app-business-dashboard',
+  selector: 'app-analitics-dashboard',
   imports: [CommonModule],
-  templateUrl: './business-dashboard.component.html',
+  templateUrl: './analitics-dashboard.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './business-dashboard.component.css',
+  styleUrl: './analitics-dashboard.css',
 })
 export class BusinessDashboardComponent implements OnInit {
   inventory = inject(InventoryService);
