@@ -1,0 +1,89 @@
+<div class="page-header">
+  <div>
+    <h1>Inventario</h1>
+    <p>Gestiona tus insumos: altas, bajas y modificaciones (US19). Las cantidades se descuentan automáticamente al vender un plato vinculado por receta (US20).</p>
+  </div>
+  <button class="btn btn-primary" (click)="openCreate()">+ Nuevo insumo</button>
+</div>
+
+@if (showForm()) {
+  <div class="card" style="margin-bottom:1.5rem; max-width:560px;">
+    <h3>{{ editingId() ? 'Editar insumo' : 'Nuevo insumo' }}</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-field">
+        <label>Nombre del insumo</label>
+        <input type="text" formControlName="name" placeholder="Ej. Pechuga de pollo" />
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-field">
+          <label>Unidad</label>
+          <input type="text" formControlName="unit" placeholder="kg, L, unidad" />
+        </div>
+        <div class="form-field">
+          <label>Tipo de almacenamiento</label>
+          <select formControlName="storageType">
+            @for (opt of storageOptions; track opt) {
+              <option [value]="opt">{{ storageLabel[opt] }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Cantidad actual</label>
+          <input type="number" formControlName="quantity" />
+        </div>
+        <div class="form-field">
+          <label>Stock mínimo (alerta)</label>
+          <input type="number" formControlName="minThreshold" />
+        </div>
+        <div class="form-field">
+          <label>Vida útil (días, US22)</label>
+          <input type="number" formControlName="shelfLifeDays" />
+        </div>
+        <div class="form-field">
+          <label>Costo unitario (S/)</label>
+          <input type="number" formControlName="unitCost" step="0.1" />
+        </div>
+      </div>
+      <div style="display:flex; gap:.75rem;">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-ghost" (click)="cancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+}
+
+<div class="card">
+  @if (inventory.loading()) {
+    <p>Cargando inventario…</p>
+  } @else if (inventory.items().length === 0) {
+    <div class="empty-state">Aún no registras insumos. Crea el primero con "Nuevo insumo".</div>
+  } @else {
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Insumo</th>
+          <th>Cantidad</th>
+          <th>Almacenamiento</th>
+          <th>Vence</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of inventory.items(); track item.id) {
+          <tr>
+            <td><strong>{{ item.name }}</strong></td>
+            <td>{{ item.quantity }} {{ item.unit }}</td>
+            <td>{{ storageLabel[item.storageType] }}</td>
+            <td>{{ item.expirationDate }}</td>
+            <td><span [class]="statusClass(item)">{{ statusLabel[item.status] }}</span></td>
+            <td style="text-align:right; white-space:nowrap;">
+              <button class="btn btn-ghost" (click)="openEdit(item)">Editar</button>
+              <button class="btn btn-ghost" (click)="remove(item)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
