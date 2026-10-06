@@ -1,15 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 
-/**
- * Fake API para el frontend de StockIA — NO es el backend real.
- * Simula, en el navegador, los endpoints REST que el backend expondrá en el
- * Sprint 2 (uno por Aggregate Root, ver Capítulo IV, 4.6.5 del informe).
- * Para conectar el backend real: quitar `withInMemoryWebApi` de app.config.ts
- * y apuntar `environment.apiBaseUrl` a la URL del API real — ningún componente
- * ni servicio de aplicación necesita cambiar, porque solo hablan con las clases
- * `*ApiService` de la capa de infraestructura.
- */
 @Injectable({ providedIn: 'root' })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
@@ -274,9 +265,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 1, planId: 1, status: 'ACTIVE', renewalDate: inDays(30), paymentMethod: 'STRIPE' },
     ];
 
-    // Bounded Context Sales / Order Management (US27, ver Capítulo IV, 4.6.5).
-    // Se siembran un par de ventas de ejemplo para que /app/sales no se vea
-    // vacío al cargar; el resto se genera en vivo con "Simular venta" en Recetas.
+    // Para el bounded Context Sales / Order Management
     const sales = [
       {
         id: 1,
@@ -316,7 +305,6 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  // La API fake no valida contraseñas con hash — es un mock para desarrollo frontend.
   responseInterceptor(res: any, ri: RequestInfo) {
     return res;
   }
