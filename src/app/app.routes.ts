@@ -16,7 +16,6 @@ export const routes: Routes = [
   //   loadChildren: () =>
   //     import('./inventory/presentation/inventory.routes').then((m) => m.inventoryRoutes),
   // },
-
   {
     path: 'inventory',
     loadChildren: () =>
