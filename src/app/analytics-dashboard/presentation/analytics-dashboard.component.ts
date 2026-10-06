@@ -9,9 +9,9 @@ import { DemandForecastingStore } from '../../demand-forecasting/application/dem
 @Component({
   selector: 'app-analytics-dashboard',
   imports: [CommonModule],
-  templateUrl: './analytics-dashboard.html',
+  templateUrl: './analytics-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './analytics-dashboard.css',
+  styleUrl: './analytics-dashboard.component.css',
 })
 export class AnalyticsDashboardComponent implements OnInit {
   inventory = inject(InventoryService);

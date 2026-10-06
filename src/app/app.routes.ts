@@ -24,8 +24,7 @@ export const routes: Routes = [
   },
   {
     path: 'sales',
-    loadChildren: () =>
-      import('./sales-order/presentation/sales.route').then((m) => m.salesRoutes),
+    loadChildren: () => import('./sales-order/presentation/sales.route').then((m) => m.salesRoutes),
   },
   {
     path: 'subscription',
