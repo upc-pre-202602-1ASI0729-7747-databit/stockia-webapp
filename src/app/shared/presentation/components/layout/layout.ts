@@ -25,7 +25,7 @@ export interface NavigationOption {
 export class Layout {
   /** Navigation options rendered in the sidebar. */
   protected readonly options: NavigationOption[] = [
-    { link: '/home', label: 'Inicio', icon: 'home' },
+    { link: '/dashboard', label: 'Inicio', icon: 'home' },
     { link: '/subscription', label: 'Planes y suscripción', icon: 'credit_card' },
     { link: '/inventory/items', label: 'Inventario', icon: 'inventory_2' },
     { link: '/inventory/recipes', label: 'Recetas', icon: 'restaurant_menu' },
