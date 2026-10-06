@@ -1,0 +1,71 @@
+<div class="page-header">
+  <div>
+    <h1>Roles y permisos</h1>
+    <p>Asigna el rol Administrador o Empleado a cada integrante de tu equipo (US23), invita nuevos integrantes o dalos de baja (US33).</p>
+  </div>
+  <button class="btn btn-primary" (click)="openInvite()">+ Invitar integrante</button>
+</div>
+
+@if (errorMessage()) {
+  <p class="form-error" style="margin-bottom:1rem">{{ errorMessage() }}</p>
+}
+
+@if (showInviteForm()) {
+  <div class="card" style="margin-bottom:1.5rem; max-width:480px;">
+    <h3>Invitar integrante</h3>
+    <form [formGroup]="inviteForm" (ngSubmit)="sendInvite()">
+      <div class="form-field">
+        <label>Nombre completo</label>
+        <input type="text" formControlName="fullName" placeholder="Nombre del integrante" />
+      </div>
+      <div class="form-field">
+        <label>Correo</label>
+        <input type="email" formControlName="email" placeholder="correo@restaurante.com" />
+      </div>
+      <div class="form-field">
+        <label>Rol</label>
+        <select formControlName="role">
+          @for (role of roles; track role) {
+            <option [value]="role">{{ roleLabel[role] }}</option>
+          }
+        </select>
+      </div>
+      <p class="hint" style="font-size:.78rem; color:var(--color-muted); margin-bottom:1rem;">
+        Se crea con la contraseña temporal <code>stockia123</code> (en producción se enviaría un correo de invitación real).
+      </p>
+      <div style="display:flex; gap:.75rem;">
+        <button type="submit" class="btn btn-primary">Enviar invitación</button>
+        <button type="button" class="btn btn-ghost" (click)="showInviteForm.set(false)">Cancelar</button>
+      </div>
+    </form>
+  </div>
+}
+
+<div class="card">
+  @if (users().length === 0) {
+    <div class="empty-state">No hay usuarios registrados todavía.</div>
+  } @else {
+    <table class="data-table">
+      <thead><tr><th>Nombre</th><th>Correo</th><th>Restaurante</th><th>Rol</th><th></th></tr></thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr>
+            <td>{{ user.fullName }} @if (isCurrentUser(user)) { <span class="badge badge-muted">Tú</span> }</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.restaurantName }}</td>
+            <td>
+              <select [disabled]="!canChangeRole(user)" (change)="changeRole(user, $any($event.target).value)">
+                @for (role of roles; track role) {
+                  <option [value]="role" [selected]="role === user.role">{{ roleLabel[role] }}</option>
+                }
+              </select>
+            </td>
+            <td style="text-align:right;">
+              <button class="btn btn-ghost" (click)="remove(user)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
