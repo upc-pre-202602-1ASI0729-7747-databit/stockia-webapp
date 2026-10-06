@@ -1,0 +1,94 @@
+<div class="page-header">
+  <div>
+    <h1>Alertas</h1>
+    <p>Notificaciones de stock bajo, vencimientos y fallas de equipo, enviadas por WhatsApp y correo (US26, US28).</p>
+  </div>
+  <div style="display:flex; align-items:center; gap:.75rem;">
+    <span class="badge badge-warning">{{ alertsSrv.pendingCount() }} pendientes</span>
+    <button class="btn btn-primary" (click)="openCreate()">+ Nueva alerta</button>
+  </div>
+</div>
+
+@if (showForm()) {
+  <div class="card" style="margin-bottom:1.5rem; max-width:560px;">
+    <h3>{{ editingId() ? 'Editar alerta' : 'Nueva alerta' }}</h3>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-field">
+          <label>Tipo</label>
+          <select formControlName="type">
+            @for (t of types; track t) {
+              <option [value]="t">{{ typeLabel[t] }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Severidad</label>
+          <select formControlName="severity">
+            @for (s of severities; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Mensaje</label>
+        <input type="text" formControlName="message" placeholder="Ej. Lechuga por debajo del mínimo" />
+        @if (form.controls.message.touched && form.controls.message.invalid) {
+          <span class="form-error">Mínimo 5 caracteres.</span>
+        }
+      </div>
+
+      <div class="form-field">
+        <label>Canal principal</label>
+        <select formControlName="channel">
+          <option value="WHATSAPP">WhatsApp</option>
+          <option value="EMAIL">Correo</option>
+        </select>
+      </div>
+
+      <div style="display:flex; gap:.75rem;">
+        <button type="submit" class="btn btn-primary">{{ editingId() ? 'Guardar cambios' : 'Crear alerta' }}</button>
+        <button type="button" class="btn btn-ghost" (click)="showForm.set(false)">Cancelar</button>
+      </div>
+    </form>
+  </div>
+}
+
+<div class="card">
+  @if (alertsSrv.alerts().length === 0) {
+    <div class="empty-state">No hay alertas registradas.</div>
+  } @else {
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th>Mensaje</th><th>Severidad</th><th>Entrega</th><th>Fecha</th><th></th></tr></thead>
+      <tbody>
+        @for (alert of alertsSrv.alerts(); track alert.id) {
+          <tr [style.opacity]="alert.acknowledged ? 0.5 : 1">
+            <td>{{ typeLabel[alert.type] }}</td>
+            <td>{{ alert.message }}</td>
+            <td><span [class]="severityClass(alert)">{{ alert.severity }}</span></td>
+            <td>
+              @if (alert.delivered) {
+                <span class="badge badge-success">Entregada ({{ alert.requiredChannels.length }} canal{{ alert.requiredChannels.length > 1 ? 'es' : '' }})</span>
+              } @else {
+                <span class="badge badge-warning">Falta {{ channelLabel(alert.pendingChannel!) }}</span>
+                <button class="btn btn-ghost" (click)="retryDelivery(alert)">Reintentar entrega</button>
+              }
+            </td>
+            <td>{{ alert.createdAt | date: 'dd/MM HH:mm' }}</td>
+            <td style="text-align:right; white-space:nowrap;">
+              @if (!alert.acknowledged) {
+                <button class="btn btn-ghost" [disabled]="!alert.delivered" [title]="!alert.delivered ? 'Debe entregarse por todos los canales requeridos antes de marcarse como atendida' : ''" (click)="acknowledge(alert)">Marcar atendida</button>
+              } @else {
+                <span class="badge badge-success">Atendida</span>
+              }
+              <button class="btn btn-ghost" (click)="openEdit(alert)">Editar</button>
+              <button class="btn btn-ghost" (click)="remove(alert)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

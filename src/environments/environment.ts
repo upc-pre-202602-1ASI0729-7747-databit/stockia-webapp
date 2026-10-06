@@ -4,11 +4,12 @@ export const environment = {
   platformProviderPlansEndpointPath: '/plans',
   platformProviderSubscriptionsEndpointPath: '/subscriptions',
   // Cada integrante agregará aquí las rutas de su bounded context, por ejemplo:
-platformProviderDemandForecastsEndpointPath: '/demandForecasts',
-platformProviderRecommendationsEndpointPath: '/recommendations',
+  platformProviderDemandForecastsEndpointPath: '/demandForecasts',
+  platformProviderDashboardEndpointPath: '/dashboard',
 
-  
+  platformProviderRecommendationsEndpointPath: '/recommendations',
+
   platformProviderInventoryItemsEndpointPath: '/inventoryItems',
   platformProviderRecipesEndpointPath: '/recipes',
   platformProviderSalesEndpointPath: '/sales',
-      };
+};
