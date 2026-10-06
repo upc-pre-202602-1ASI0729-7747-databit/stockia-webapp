@@ -11,11 +11,11 @@ interface NavItem {
 }
 
 @Component({
-    selector: 'app-shell',
-    imports: [RouterLink, RouterLinkActive, RouterOutlet],
-    templateUrl: './shell.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './shell.component.css'
+  selector: 'app-shell',
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  templateUrl: './shell.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './shell.component.css',
 })
 export class ShellComponent {
   auth = inject(AuthService);
@@ -30,7 +30,7 @@ export class ShellComponent {
     { label: 'Alertas', path: '/app/alerts', icon: '🔔' },
     { label: 'Recomendaciones', path: '/app/recommendations', icon: '💡' },
     { label: 'Roles y permisos', path: '/app/roles', icon: '👥', adminOnly: true },
-    { label: 'Planes', path: '/app/plans', icon: '💳' },
+    { label: 'Planes', path: '/app/subscription', icon: '💳' },
   ];
 
   logout() {
