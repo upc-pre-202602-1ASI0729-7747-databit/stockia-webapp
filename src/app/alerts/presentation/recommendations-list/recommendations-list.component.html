@@ -1,0 +1,32 @@
+<div class="page-header">
+  <div>
+    <h1>Recomendaciones automáticas</h1>
+    <p>Sugerencias de ajuste de menú y compras según popularidad y estacionalidad (US25).</p>
+  </div>
+</div>
+
+<div class="card">
+  @if (alertsSrv.recommendations().length === 0) {
+    <div class="empty-state">No hay recomendaciones por ahora.</div>
+  } @else {
+    <table class="data-table">
+      <thead><tr><th>Tipo</th><th>Recomendación</th><th>Impacto esperado</th><th></th></tr></thead>
+      <tbody>
+        @for (rec of alertsSrv.recommendations(); track rec.id) {
+          <tr [style.opacity]="rec.applied ? 0.6 : 1">
+            <td>{{ typeLabel[rec.type] }}</td>
+            <td>{{ rec.message }}</td>
+            <td>{{ rec.expectedImpact }}</td>
+            <td style="text-align:right;">
+              @if (!rec.applied) {
+                <button class="btn btn-secondary" (click)="apply(rec.id)">Aplicar</button>
+              } @else {
+                <span class="badge badge-success">Aplicada</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
