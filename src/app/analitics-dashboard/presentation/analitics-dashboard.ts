@@ -1,13 +1,10 @@
 import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryService } from '../../product-inventory/application/inventory.service';
-//import { AlertsService } from '../../alerts/application/alerts.service';
-//import { ForecastService } from '../../demand-forecasting/application/forecast.service';
-//import { AuthService } from '../../../iam/application/auth.service';
-import {
-  StockStatus,
-  STOCK_STATUS_LABEL,
-} from '../../product-inventory/domain/inventory-item.entity';
+import { AlertsService } from '../../alerts/application/alerts.service';
+import { AuthService } from '../../iam/application/auth.service';
+import { StockStatus, STOCK_STATUS_LABEL} from '../../product-inventory/domain/inventory-item.entity';
+import { DemandForecastingStore } from '../../demand-forecasting/application/demand-forecasting.store';
 
 @Component({
   selector: 'app-business-dashboard',
@@ -19,7 +16,7 @@ import {
 export class BusinessDashboardComponent implements OnInit {
   inventory = inject(InventoryService);
   alertsSrv = inject(AlertsService);
-  forecast = inject(ForecastService);
+  forecast = inject(DemandForecastingStore);
   auth = inject(AuthService);
 
   statusLabel = STOCK_STATUS_LABEL;
@@ -28,7 +25,7 @@ export class BusinessDashboardComponent implements OnInit {
   ngOnInit() {
     this.inventory.loadItems().subscribe();
     this.alertsSrv.loadAlerts().subscribe();
-    this.forecast.load().subscribe();
+    this.forecast.loadForecasts();
   }
 
   get criticalItems() {
