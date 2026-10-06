@@ -1,0 +1,58 @@
+<div class="page-header">
+  <div>
+    <h1>Mi perfil</h1>
+    <p>Edita tus datos de cuenta y de restaurante (US32).</p>
+  </div>
+</div>
+
+<div class="card" style="max-width: 520px;">
+  <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+    <div class="profile-avatar">{{ (auth.currentUser()?.fullName || '?').charAt(0) }}</div>
+    <div>
+      <strong style="display:block;">{{ auth.currentUser()?.fullName }}</strong>
+      <span class="badge badge-muted">{{ roleLabel[auth.currentUser()!.role] }}</span>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="form-error" style="margin-bottom:1rem">{{ errorMessage() }}</p>
+  }
+  @if (savedOk()) {
+    <p class="badge badge-success" style="margin-bottom:1rem;">✓ Perfil actualizado</p>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-field">
+      <label for="fullName">Nombre completo</label>
+      <input id="fullName" type="text" formControlName="fullName" />
+      @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+        <span class="form-error">Mínimo 3 caracteres.</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="restaurantName">Nombre del restaurante</label>
+      <input id="restaurantName" type="text" formControlName="restaurantName" />
+    </div>
+
+    <div class="form-field">
+      <label for="email">Correo</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <span class="form-error">Ingresa un correo válido.</span>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="password">Nueva contraseña (opcional)</label>
+      <input id="password" type="password" formControlName="password" placeholder="Dejar en blanco para no cambiarla" />
+      @if (form.controls.password.touched && form.controls.password.invalid) {
+        <span class="form-error">Mínimo 4 caracteres.</span>
+      }
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="saving()">
+      {{ saving() ? 'Guardando…' : 'Guardar cambios' }}
+    </button>
+  </form>
+</div>

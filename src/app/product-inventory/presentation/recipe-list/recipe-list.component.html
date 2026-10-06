@@ -1,0 +1,83 @@
+<div class="page-header">
+  <div>
+    <h1>Recetas</h1>
+    <p>Vincula insumos a cada plato para que el stock se descuente automáticamente al venderse (US20). "Simular venta" registra una venta real en Historial de ventas; si algún insumo no alcanza, la venta se rechaza y el stock no se toca.</p>
+  </div>
+  <button class="btn btn-primary" (click)="openCreate()">+ Nueva receta</button>
+</div>
+
+@if (showForm()) {
+  <div class="card" style="margin-bottom:1.5rem; max-width:620px;">
+    <h3>{{ editingId() ? 'Editar receta' : 'Nueva receta' }}</h3>
+    <div class="form-field">
+      <label>Nombre del plato</label>
+      <input type="text" [(ngModel)]="dishName" placeholder="Ej. Pizza Margarita" />
+    </div>
+
+    <div style="display:flex; gap:.75rem; align-items:flex-end; margin-bottom:1rem;">
+      <div class="form-field" style="flex:2; margin-bottom:0;">
+        <label>Insumo</label>
+        <select [(ngModel)]="selectedItemId">
+          <option [ngValue]="null">Selecciona un insumo…</option>
+          @for (item of inventory.items(); track item.id) {
+            <option [ngValue]="item.id">{{ item.name }} ({{ item.unit }})</option>
+          }
+        </select>
+      </div>
+      <div class="form-field" style="flex:1; margin-bottom:0;">
+        <label>Cantidad</label>
+        <input type="number" [(ngModel)]="selectedQty" min="0.1" step="0.1" />
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="addLine()">Agregar</button>
+    </div>
+
+    @if (draftLines().length > 0) {
+      <table class="data-table" style="margin-bottom:1rem;">
+        <thead><tr><th>Insumo</th><th>Cantidad requerida</th><th></th></tr></thead>
+        <tbody>
+          @for (line of draftLines(); track $index) {
+            <tr>
+              <td>{{ line.inventoryItemName }}</td>
+              <td>{{ line.quantityRequired }} {{ line.unit }}</td>
+              <td><button class="btn btn-ghost" (click)="removeLine($index)">Quitar</button></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+    <div style="display:flex; gap:.75rem;">
+      <button class="btn btn-primary" (click)="save()">{{ editingId() ? 'Guardar cambios' : 'Guardar receta' }}</button>
+      <button class="btn btn-ghost" (click)="showForm.set(false)">Cancelar</button>
+    </div>
+  </div>
+}
+
+<div class="card">
+  @if (inventory.recipes().length === 0) {
+    <div class="empty-state">Aún no registras recetas.</div>
+  } @else {
+    <table class="data-table">
+      <thead><tr><th>Plato</th><th>Ingredientes</th><th></th></tr></thead>
+      <tbody>
+        @for (recipe of inventory.recipes(); track recipe.id) {
+          <tr>
+            <td><strong>{{ recipe.dishName }}</strong></td>
+            <td>
+              @for (line of recipe.ingredients; track line.inventoryItemId) {
+                <span class="badge badge-muted" style="margin:0 .25rem .25rem 0;">{{ line.inventoryItemName }} ({{ line.quantityRequired }}{{ line.unit }})</span>
+              }
+            </td>
+            <td style="text-align:right; white-space:nowrap;">
+              <button class="btn btn-secondary" (click)="simulateSale(recipe.id)">
+                {{ justSoldId() === recipe.id ? '✓ Stock descontado' : 'Simular venta (DishSold)' }}
+              </button>
+              <button class="btn btn-ghost" (click)="openEdit(recipe)">Editar</button>
+              <button class="btn btn-ghost" (click)="remove(recipe.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

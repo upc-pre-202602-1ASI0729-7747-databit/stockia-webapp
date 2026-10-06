@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.plans-subscription {
+  margin-bottom: 1.5rem;
+}
+
+.plans-error {
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.plans-hint {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 767.98px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+}

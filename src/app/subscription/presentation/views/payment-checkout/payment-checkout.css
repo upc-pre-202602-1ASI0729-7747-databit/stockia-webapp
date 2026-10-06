@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+.checkout-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 560px;
+}
+
+.checkout-eyebrow {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.checkout-summary h2 {
+  margin: 0.15rem 0 0.5rem;
+}
+
+.checkout-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.checkout-price .amount {
+  color: var(--color-primary-dark);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.checkout-price .period {
+  color: var(--color-muted);
+}
+
+.checkout-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checkout-features li {
+  font-size: 0.88rem;
+}
+
+.checkout-features li::before {
+  margin-right: 0.5rem;
+  color: var(--color-success);
+  font-weight: 700;
+  content: '✓';
+}
+
+.checkout-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.checkout-methods legend {
+  margin-bottom: 0.5rem;
+  padding: 0;
+  color: var(--color-primary-dark);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.method-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    border-color 0.12s ease,
+    background 0.12s ease;
+}
+
+.method-option:hover {
+  border-color: var(--color-primary-light);
+}
+
+.method-option.selected {
+  border-color: var(--color-primary-light);
+  background: var(--color-success-bg);
+}
+
+.method-option input {
+  accent-color: var(--color-primary-light);
+}
+
+.method-label {
+  display: block;
+  color: var(--color-primary-dark);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.method-hint {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.checkout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.checkout-actions a,
+.empty-state a {
+  text-decoration: none;
+}
+
+.checkout-hint {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 767.98px) {
+  .checkout-actions {
+    flex-direction: column;
+  }
+}
