@@ -97,7 +97,7 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'auth/sign-in' },
+  //{ path: '**', redirectTo: 'auth/sign-in' },
   //{ path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Página no encontrada` },
 ];
