@@ -27,8 +27,12 @@ export class Layout {
   protected readonly options: NavigationOption[] = [
     { link: '/home', label: 'Inicio', icon: 'home' },
     { link: '/subscription', label: 'Planes y suscripción', icon: 'credit_card' },
+    { link: '/inventory/items', label: 'Inventario', icon: 'inventory_2' },
+    { link: '/inventory/recipes', label: 'Recetas', icon: 'restaurant_menu' },
+    { link: '/sales/history', label: 'Historial de ventas', icon: 'receipt_long' },
     // Each team member adds the navigation option of their bounded context here, e.g.:
     // { link: '/inventory', label: 'Inventario', icon: 'inventory_2' },
+
   ];
 
   /** Whether the sidebar is open on small screens. */

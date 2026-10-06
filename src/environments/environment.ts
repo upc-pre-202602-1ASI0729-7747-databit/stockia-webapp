@@ -6,4 +6,9 @@ export const environment = {
   // Cada integrante agregará aquí las rutas de su bounded context, por ejemplo:
 platformProviderDemandForecastsEndpointPath: '/demandForecasts',
 platformProviderRecommendationsEndpointPath: '/recommendations',
+
+  
+  platformProviderInventoryItemsEndpointPath: '/inventoryItems',
+  platformProviderRecipesEndpointPath: '/recipes',
+  platformProviderSalesEndpointPath: '/sales',
       };
