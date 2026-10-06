@@ -1,0 +1,79 @@
+<div class="page-header">
+  <div>
+    <h1>Hola, {{ auth.currentUser()?.fullName || 'equipo' }} 👋</h1>
+    <p>Resumen operativo de {{ auth.currentUser()?.restaurantName || 'tu restaurante' }} — vista simplificada por rol (US21, US23).</p>
+  </div>
+</div>
+
+<div class="grid-stats">
+  <div class="card">
+    <p>Insumos registrados</p>
+    <h2>{{ inventory.items().length }}</h2>
+  </div>
+  <div class="card">
+    <p>Stock bajo / crítico</p>
+    <h2 [style.color]="'var(--color-danger)'">{{ inventory.criticalCount() }}</h2>
+  </div>
+  <div class="card">
+    <p>Por vencer (≤3 días)</p>
+    <h2 [style.color]="'var(--color-warning)'">{{ inventory.expiringSoonCount() }}</h2>
+  </div>
+  <div class="card">
+    <p>Valor del inventario</p>
+    <h2>S/ {{ inventory.inventoryValue() | number: '1.0-2' }}</h2>
+  </div>
+</div>
+
+<div class="dashboard-grid">
+  <div class="card">
+    <h3>Insumos críticos</h3>
+    @if (criticalItems.length === 0) {
+      <div class="empty-state">Sin insumos en estado crítico. 🎉</div>
+    } @else {
+      <table class="data-table">
+        <thead><tr><th>Insumo</th><th>Cantidad</th><th>Estado</th></tr></thead>
+        <tbody>
+          @for (item of criticalItems; track item.id) {
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.quantity }} {{ item.unit }}</td>
+              <td><span class="badge badge-danger">{{ statusLabel[item.status] }}</span></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+
+  <div class="card">
+    <h3>Alertas recientes</h3>
+    @if (alertsSrv.alerts().length === 0) {
+      <div class="empty-state">Sin alertas.</div>
+    } @else {
+      <ul class="alert-feed">
+        @for (alert of alertsSrv.alerts().slice(0, 5); track alert.id) {
+          <li>
+            <span class="badge" [class.badge-danger]="alert.severity === 'CRITICAL'" [class.badge-warning]="alert.severity === 'WARNING'" [class.badge-muted]="alert.severity === 'INFO'">
+              {{ alert.severity }}
+            </span>
+            {{ alert.message }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>
+
+@if (forecast.latest()) {
+  <div class="card" style="margin-top:1.5rem;">
+    <h3>Demanda proyectada (IA) — próximos días</h3>
+    <div class="mini-chart">
+      @for (point of forecast.latest()!.dataPoints; track point.date) {
+        <div class="mini-col">
+          <div class="mini-bar" [style.height.px]="point.projectedUnits / 1.5"></div>
+          <span>{{ point.dayLabel }}</span>
+        </div>
+      }
+    </div>
+  </div>
+}
