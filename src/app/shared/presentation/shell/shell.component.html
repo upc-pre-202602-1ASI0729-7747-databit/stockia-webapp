@@ -1,0 +1,40 @@
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">S</span>
+      <span>StockIA</span>
+    </div>
+    <nav>
+      @for (item of navItems; track item.path) {
+        @if (!item.adminOnly || auth.isAdmin()) {
+          <a [routerLink]="item.path" routerLinkActive="active" class="nav-link">
+            <span class="nav-icon">{{ item.icon }}</span>
+            {{ item.label }}
+          </a>
+        }
+      }
+    </nav>
+    <div class="sidebar-footer">
+      <p class="env-tag">Fake API · datos de ejemplo</p>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div></div>
+      <div class="user-chip">
+        <a routerLink="/app/profile" class="user-chip-link" title="Editar mi perfil">
+          <div class="avatar">{{ (auth.currentUser()?.fullName || '?').charAt(0) }}</div>
+          <div>
+            <strong>{{ auth.currentUser()?.fullName }}</strong>
+            <span>{{ auth.currentUser()?.role === UserRole.ADMIN ? 'Administrador' : 'Empleado' }}</span>
+          </div>
+        </a>
+        <button class="btn btn-ghost" (click)="logout()">Salir</button>
+      </div>
+    </header>
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

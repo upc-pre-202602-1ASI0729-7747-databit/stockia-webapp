@@ -1,19 +1,19 @@
 import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InventoryService } from '../../product-inventory/application/inventory.service';
-import { AlertsService } from '../../alerts/application/alerts.service';
-import { AuthService } from '../../iam/application/auth.service';
-import { StockStatus, STOCK_STATUS_LABEL} from '../../product-inventory/domain/inventory-item.entity';
-import { DemandForecastingStore } from '../../demand-forecasting/application/demand-forecasting.store';
+import { InventoryService } from '../../../product-inventory/application/inventory.service';
+import { AlertsService } from '../../../alerts/application/alerts.service';
+import { AuthService } from '../../../iam/application/auth.service';
+import { StockStatus, STOCK_STATUS_LABEL} from '../../../product-inventory/domain/inventory-item.entity';
+import { DemandForecastingStore } from '../../../demand-forecasting/application/demand-forecasting.store';
 
 @Component({
-  selector: 'app-business-dashboard',
+  selector: 'app-analytics-dashboard',
   imports: [CommonModule],
-  templateUrl: './business-dashboard.component.html',
+  templateUrl: './analytics-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './business-dashboard.component.css',
+  styleUrl: './analytics-dashboard.component.css',
 })
-export class BusinessDashboardComponent implements OnInit {
+export class AnalyticsDashboardComponent implements OnInit {
   inventory = inject(InventoryService);
   alertsSrv = inject(AlertsService);
   forecast = inject(DemandForecastingStore);
@@ -25,7 +25,7 @@ export class BusinessDashboardComponent implements OnInit {
   ngOnInit() {
     this.inventory.loadItems().subscribe();
     this.alertsSrv.loadAlerts().subscribe();
-    this.forecast.loadForecasts();
+    this.forecast.loadForecasts().then();
   }
 
   get criticalItems() {
