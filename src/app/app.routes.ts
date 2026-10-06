@@ -16,6 +16,17 @@ export const routes: Routes = [
   //   loadChildren: () =>
   //     import('./inventory/presentation/inventory.routes').then((m) => m.inventoryRoutes),
   // },
+
+  {
+    path: 'inventory',
+    loadChildren: () =>
+      import('./product-inventory/presentation/inventory.routes').then((m) => m.inventoryRoutes),
+  },
+  {
+    path: 'sales',
+    loadChildren: () =>
+      import('./sales-order/presentation/sales.route').then((m) => m.salesRoutes),
+  },
   {
     path: 'subscription',
     loadChildren: () =>
