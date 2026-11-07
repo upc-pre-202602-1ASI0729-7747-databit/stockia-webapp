@@ -1,16 +1,20 @@
+/**
+ * Development environment: the StockIA Platform RESTful API running locally (mvn spring-boot:run).
+ */
 export const environment = {
   production: false,
-  platformProviderApiBaseUrl: 'https://stockia-mock-api.onrender.com',
+  platformProviderApiBaseUrl: 'http://localhost:8181/api/v1',
+  platformProviderAuthenticationEndpointPath: '/authentication',
+  platformProviderUsersEndpointPath: '/users',
+  platformProviderRestaurantRegistrationsEndpointPath: '/restaurant-registrations',
+  platformProviderRestaurantsEndpointPath: '/restaurants',
   platformProviderPlansEndpointPath: '/plans',
   platformProviderSubscriptionsEndpointPath: '/subscriptions',
-  // Cada integrante agregará aquí las rutas de su bounded context, por ejemplo:
-  // platformProviderPlansEndpointPath: '/plans',
-  platformProviderDemandForecastsEndpointPath: '/demandForecasts',
-  platformProviderRecommendationsEndpointPath: '/recommendations',
-
-  platformProviderInventoryItemsEndpointPath: '/inventoryItems',
+  platformProviderInventoryItemsEndpointPath: '/inventory-items',
   platformProviderRecipesEndpointPath: '/recipes',
   platformProviderSalesEndpointPath: '/sales',
-  ///
-  apiBaseUrl: 'https://stockia-mock-api.onrender.com/api/v1',
+  platformProviderAlertsEndpointPath: '/alerts',
+  platformProviderDemandForecastsEndpointPath: '/demand-forecasts',
+  platformProviderRecommendationsEndpointPath: '/recommendations',
+  platformProviderDashboardEndpointPath: '/dashboard'
 };
