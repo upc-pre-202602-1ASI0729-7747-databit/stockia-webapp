@@ -1,103 +1,41 @@
-import { Routes } from '@angular/router';
-//import { Home } from './shared/presentation/views/home/home';
-import { authGuard, adminGuard } from './iam/infrastructure/auth.guard';
+import {Routes} from '@angular/router';
+import {authenticationGuard} from './iam/infrastructure/iam.guard';
+import {iamAuthRoutes, iamAppRoutes} from './iam/iam.routes';
+import {restaurantRegistrationRoutes} from './restaurant-registration/restaurant-registration.routes';
+import {analyticsDashboardRoutes} from './analytics-dashboard/analytics-dashboard.routes';
+import {stockManagementRoutes} from './stock-management/stock-management.routes';
+import {recipesManagementRoutes} from './recipes-management/recipes-management.routes';
+import {mlRecommendationsRoutes} from './ml-recommendations/ml-recommendations.routes';
+import {notificationsMessagingRoutes} from './notifications-messaging/notifications-messaging.routes';
+import {subscriptionPaymentsRoutes} from './subscription-payments/subscription-payments.routes';
+import {sharedAppRoutes} from './shared/shared.routes';
 
-/** Lazy loader for the fallback view. */
-const pageNotFound = () =>
-  import('./shared/presentation/views/page-not-found/page-not-found').then((m) => m.PageNotFound);
+const layout = () => import('./shared/presentation/components/layout/layout').then(m => m.Layout);
+const terms = () => import('./shared/presentation/views/terms/terms').then(m => m.Terms);
+const pageNotFound = () => import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound);
 
-/** Base title shown in the browser tab. */
-const baseTitle = 'StockIA';
-
+/**
+ * Root routes. Public views live under /auth (the paths the landing page buttons open: /auth/sign-in
+ * and /auth/sign-up) and the application under /app, protected by the authentication guard. Each
+ * bounded context contributes its own routes; every view is loaded lazily.
+ */
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'auth/sign-in' },
+  {path: '', redirectTo: '/auth/sign-in', pathMatch: 'full'},
+  {path: 'auth', children: [...iamAuthRoutes, ...restaurantRegistrationRoutes, {path: '', redirectTo: 'sign-in', pathMatch: 'full'}]},
+  {path: 'terms', loadComponent: terms, title: 'StockIA - Terms of service'},
   {
-    path: 'auth/sign-in',
-    loadComponent: () =>
-      import('./iam/presentation/sign-in/sign-in.component').then((m) => m.SignInComponent),
-  },
-  {
-    path: 'auth/sign-up',
-    loadComponent: () =>
-      import('./iam/presentation/sing-up/sign-up.component').then((m) => m.SignUpComponent),
-  },
-  {
-    path: 'app',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./shared/presentation/shell/shell.component').then((m) => m.ShellComponent),
+    path: 'app', loadComponent: layout, canActivate: [authenticationGuard], canActivateChild: [authenticationGuard],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-      {
-        path: 'dashboard',
-        loadChildren: () =>
-          import('./analytics-dashboard/presentation/dashboard.routes').then(
-            (m) => m.dashboardRoutes,
-          ),
-      },
-      {
-        path: 'inventory',
-        loadChildren: () =>
-          import('./product-inventory/presentation/inventory.routes').then(
-            (m) => m.inventoryRoutes,
-          ),
-      },
-      {
-        path: 'recipes',
-        loadComponent: () =>
-          import('./product-inventory/presentation/recipe-list/recipe-list.component').then(
-            (m) => m.RecipeListComponent,
-          ),
-      },
-      {
-        path: 'sales',
-        loadChildren: () =>
-          import('./sales-order/presentation/sales.route').then((m) => m.salesRoutes),
-      },
-      {
-        path: 'forecast',
-        loadChildren: () =>
-          import('./demand-forecasting/presentation/demand-forecasting.routes').then(
-            (m) => m.demandForecastingRoutes,
-          ),
-      },
-      {
-        path: 'alerts',
-        loadComponent: () =>
-          import('./alerts/presentation/alerts-list/alerts-list.component').then(
-            (m) => m.AlertsListComponent,
-          ),
-      },
-      {
-        path: 'recommendations',
-        loadComponent: () =>
-          import('./alerts/presentation/recommendations-list/recommendations-list.component').then(
-            (m) => m.RecommendationsListComponent,
-          ),
-      },
-      {
-        path: 'roles',
-        canActivate: [adminGuard],
-        loadComponent: () =>
-          import('./iam/presentation/roles-list/roles-list.component').then(
-            (m) => m.RolesListComponent,
-          ),
-      },
-      {
-        path: 'profile',
-        loadComponent: () =>
-          import('./iam/presentation/profile/profile.component').then((m) => m.ProfileComponent),
-      },
-      {
-        path: 'subscription',
-        loadChildren: () =>
-          import('./subscription/presentation/subscription.routes').then(
-            (m) => m.subscriptionRoutes,
-          ),
-      },
-    ],
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      ...analyticsDashboardRoutes,
+      ...stockManagementRoutes,
+      ...recipesManagementRoutes,
+      ...mlRecommendationsRoutes,
+      ...notificationsMessagingRoutes,
+      ...iamAppRoutes,
+      ...subscriptionPaymentsRoutes,
+      ...sharedAppRoutes
+    ]
   },
-  //{ path: '**', redirectTo: 'auth/sign-in' },
-  //{ path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', loadComponent: pageNotFound, title: `${baseTitle} - Página no encontrada` },
+  {path: '**', loadComponent: pageNotFound, title: 'StockIA - Page not found'}
 ];

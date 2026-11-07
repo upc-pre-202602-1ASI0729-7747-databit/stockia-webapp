@@ -1,0 +1,762 @@
+{
+  "app": {
+    "document-title": "StockIA — Inventario para restaurantes",
+    "skip-to-content": "Saltar al contenido principal"
+  },
+  "language": {
+    "switcher": "Idioma",
+    "en": "Inglés (Estados Unidos)",
+    "es": "Español (Latinoamérica)"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "inventory": "Inventario",
+    "recipes": "Recetas",
+    "sales": "Historial de ventas",
+    "forecast": "Predicción de demanda",
+    "alerts": "Alertas",
+    "recommendations": "Recomendaciones",
+    "roles": "Roles y permisos",
+    "settings": "Configuraciones",
+    "settings-account": "Ajustes",
+    "settings-help": "Obtener ayuda",
+    "settings-plans": "Mejorar plan",
+    "sign-out": "Cerrar sesión"
+  },
+  "layout": {
+    "sidebar": "Barra lateral de StockIA",
+    "main-navigation": "Navegación principal",
+    "open-menu": "Abrir menú de navegación",
+    "environment-tag": "API Spring Boot",
+    "close-menu": "Cerrar menú de navegación",
+    "go-home": "StockIA, ir al panel",
+    "open-settings": "Ajustes de la cuenta de {{name}}",
+    "user-menu": "Menú de usuario",
+    "language-of": "Cambiar idioma"
+  },
+  "footer": {
+    "made-by": "Hecho por el equipo {{team}}.",
+    "data-source": "Datos servidos por el RESTful API de StockIA Platform (Spring Boot + MySQL).",
+    "terms": "Términos del servicio",
+    "rights": "© {{year}} DataBit · StockIA"
+  },
+  "common": {
+    "actions": "Acciones",
+    "add": "Agregar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "delete-item": "Eliminar {{name}}",
+    "edit": "Editar",
+    "edit-item": "Editar {{name}}",
+    "loading": "Cargando…",
+    "save": "Guardar",
+    "save-changes": "Guardar cambios",
+    "saving": "Guardando…",
+    "cannot-undo": "Esta acción no se puede deshacer.",
+    "close": "Cerrar",
+    "retry": "Reintentar",
+    "yes": "Sí",
+    "no": "No",
+    "back": "Volver"
+  },
+  "errors": {
+    "load": "No se pudieron cargar los datos. Revisa tu conexión e inténtalo de nuevo.",
+    "save": "No se pudieron guardar los cambios. Inténtalo de nuevo.",
+    "delete": "No se pudo eliminar el registro. Inténtalo de nuevo.",
+    "network": "El servicio no responde. Espera unos segundos e inténtalo de nuevo."
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "email": "Ingresa un correo válido (p. ej. nombre@restaurante.com).",
+    "min-length": "Usa al menos {{min}} caracteres.",
+    "min-value": "Ingresa un valor de {{min}} o más.",
+    "password-strength": "Usa al menos {{min}} caracteres, con letras y números.",
+    "passwords-match": "Las contraseñas no coinciden.",
+    "phone": "Ingresa un teléfono válido.",
+    "decimal": "Ingresa un número con hasta {{max}} decimales (p. ej. 0.125).",
+    "positive": "Ingresa una cantidad mayor que 0."
+  },
+  "fields": {
+    "full-name": "Nombre completo",
+    "restaurant-name": "Nombre del restaurante",
+    "email": "Correo",
+    "password": "Contraseña",
+    "role": "Rol",
+    "confirm-password": "Confirmar contraseña",
+    "show-password": "Mostrar contraseña",
+    "hide-password": "Ocultar contraseña",
+    "required-legend": "Los campos marcados con * son obligatorios.",
+    "restaurant-address": "Dirección del restaurante",
+    "restaurant-phone": "Teléfono del restaurante"
+  },
+  "placeholders": {
+    "full-name": "Tu nombre completo",
+    "restaurant-name": "Nombre de tu restaurante",
+    "email": "tu@restaurante.com",
+    "team-email": "nombre@restaurante.com",
+    "password": "Tu contraseña",
+    "restaurant-address": "p. ej. Av. Larco 123, Miraflores",
+    "restaurant-phone": "p. ej. +51 987 654 321"
+  },
+  "auth": {
+    "about-stockia": "Acerca de StockIA",
+    "password-rule": "Al menos {{min}} caracteres, con letras y números.",
+    "highlights": {
+      "deduction": "Descuento automático de insumos por cada plato vendido",
+      "forecast": "Predicción de demanda con IA y variables climáticas",
+      "alerts": "Alertas de stock bajo y vencimiento por WhatsApp y correo",
+      "admin-role": "Rol Administrador con acceso completo",
+      "invite-team": "Invita luego a tu equipo como Empleados",
+      "free-plan": "Sin tarjeta de crédito para el plan Esencial"
+    },
+    "sign-in": {
+      "headline": "Inventario inteligente para tu restaurante",
+      "description": "Dashboard operativo, predicción de demanda y alertas en un solo lugar.",
+      "title": "Iniciar sesión",
+      "subtitle": "Accede a tu panel de StockIA",
+      "submit": "Iniciar sesión",
+      "submitting": "Ingresando…",
+      "no-account": "¿No tienes cuenta?",
+      "go-to-sign-up": "Regístrate",
+      "demo-title": "Cuentas demo (contraseña stockia123):",
+      "forgot-password": "¿Olvidaste tu contraseña?",
+      "attempts-left": "Intentos restantes antes de bloquear la cuenta: {{remaining}} de {{max}}.",
+      "locked-until": "Bloqueada hasta las {{time}}."
+    },
+    "sign-up": {
+      "headline": "Configura tu restaurante en minutos",
+      "description": "Crea tu cuenta de administrador y empieza a registrar insumos, recetas y tu equipo.",
+      "title": "Crear cuenta",
+      "subtitle": "Regístrate en StockIA",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta…",
+      "has-account": "¿Ya tienes cuenta?",
+      "go-to-sign-in": "Inicia sesión",
+      "error": "No se pudo crear la cuenta. Inténtalo de nuevo.",
+      "welcome": "¡Bienvenido a StockIA, {{name}}!"
+    },
+    "errors": {
+      "check-fields": "Revisa el formulario",
+      "access-denied": "Acceso denegado",
+      "sign-up-failed": "No se creó la cuenta"
+    },
+    "forgot": {
+      "headline": "Recupera tu acceso",
+      "description": "Te enviaremos un enlace por correo para elegir una nueva contraseña.",
+      "title": "¿Olvidaste tu contraseña?",
+      "subtitle": "Ingresa el correo de tu cuenta de StockIA",
+      "submit": "Enviar enlace de recuperación",
+      "sent": "Si {{email}} está registrado, le enviamos un enlace para restablecer la contraseña.",
+      "demo-title": "Modo demo: copia del correo (el proveedor es simulado)",
+      "demo-code": "Código {{code}}",
+      "open-link": "Abrir el enlace de recuperación",
+      "back": "Volver a iniciar sesión",
+      "error": "No se pudo enviar el enlace",
+      "highlights": {
+        "link": "Te enviamos un enlace de recuperación a tu correo",
+        "expires": "El enlace vence en 30 minutos",
+        "unlock": "Restablecer la contraseña también desbloquea tu cuenta"
+      }
+    },
+    "reset": {
+      "headline": "Elige una nueva contraseña",
+      "description": "Usa el código del enlace de recuperación que te enviamos.",
+      "title": "Nueva contraseña",
+      "code": "Código de 6 dígitos",
+      "new-password": "Nueva contraseña",
+      "confirm-password": "Confirma la nueva contraseña",
+      "submit": "Guardar nueva contraseña",
+      "new-link": "Solicitar un nuevo enlace",
+      "code-invalid": "Ingresa el código de 6 dígitos del enlace.",
+      "done": "Contraseña actualizada",
+      "done-detail": "Inicia sesión con tu nueva contraseña.",
+      "error": "No se cambió la contraseña"
+    },
+    "terms-notice": "Al crear una cuenta aceptas los",
+    "terms-link": "Términos del servicio"
+  },
+  "iam": {
+    "roles": {
+      "ADMIN": "Administrador",
+      "EMPLOYEE": "Empleado"
+    },
+    "errors": {
+      "invalid-credentials": "Correo o contraseña incorrectos.",
+      "no-session": "Tu sesión expiró. Inicia sesión otra vez.",
+      "last-admin": "El equipo debe conservar al menos un Administrador.",
+      "remove-self": "No puedes quitar tu propia cuenta del equipo.",
+      "email-taken": "Ese correo ya está registrado. Inicia sesión o usa otro.",
+      "wrong-current-password": "La contraseña actual no es correcta.",
+      "same-password": "La nueva contraseña debe ser distinta de la actual.",
+      "admin-only": "Solo un Administrador puede hacer esto.",
+      "account-locked": "Tu cuenta está bloqueada {{minutes}} minuto(s) más por 5 contraseñas incorrectas. Inténtalo más tarde o recupera tu contraseña.",
+      "invalid-credentials-attempts": "Correo o contraseña incorrectos. Intentos restantes antes de bloquear la cuenta: {{count}}.",
+      "invalid-reset-code": "El enlace de recuperación no es válido o ya venció. Solicita uno nuevo."
+    }
+  },
+  "team": {
+    "title": "Equipo y roles",
+    "description": "Asigna el rol Administrador o Empleado a cada integrante, invita a nuevos integrantes o dalos de baja.",
+    "table-label": "Integrantes del equipo",
+    "empty": "Todavía no hay integrantes registrados.",
+    "you": "Tú",
+    "invite": "Invitar integrante",
+    "invite-title": "Invitar a un integrante",
+    "send-invite": "Enviar invitación",
+    "temporary-password": "El integrante se crea con la contraseña temporal {{password}}; una API real enviaría un correo de invitación.",
+    "invited": "{{name}} fue invitado al equipo.",
+    "invite-error": "No se pudo invitar al integrante. Inténtalo de nuevo.",
+    "role-of": "Rol de {{name}}",
+    "role-changed": "{{name}} ahora es {{role}}.",
+    "remove-of": "Quitar a {{name}} del equipo",
+    "remove-title": "Quitar integrante",
+    "remove-confirm": "¿Quitar a {{name}} del equipo?",
+    "removed": "{{name}} fue retirado del equipo.",
+    "locked": "Bloqueado",
+    "locked-hint": "Bloqueado por 5 contraseñas incorrectas",
+    "unlock": "Desbloquear",
+    "unlock-of": "Desbloquear a {{name}}",
+    "unlocked": "{{name}} ya puede iniciar sesión."
+  },
+  "inventory": {
+    "title": "Inventario",
+    "description": "Registra, edita y elimina tus insumos. Las cantidades se descuentan automáticamente al vender un plato vinculado por receta.",
+    "table-label": "Insumos",
+    "empty": "Aún no registras insumos. Crea el primero con \"Nuevo insumo\".",
+    "new": "Nuevo insumo",
+    "edit": "Editar insumo",
+    "created": "{{name}} se agregó al inventario.",
+    "updated": "{{name}} se actualizó.",
+    "deleted": "{{name}} se eliminó.",
+    "delete-title": "¿Eliminar este insumo?",
+    "columns": {
+      "item": "Insumo",
+      "quantity": "Cantidad",
+      "min-threshold": "Mínimo",
+      "storage": "Almacenamiento",
+      "expires": "Vence",
+      "status": "Estado",
+      "unit-price": "Precio unitario"
+    },
+    "fields": {
+      "name": "Nombre del insumo",
+      "unit": "Unidad",
+      "storage": "Tipo de almacenamiento",
+      "quantity": "Cantidad actual",
+      "min-threshold": "Stock mínimo",
+      "shelf-life": "Vida útil (días)",
+      "unit-cost": "Precio unitario (S/)"
+    },
+    "hints": {
+      "min-threshold": "Con esta cantidad o menos, el insumo aparece con stock bajo.",
+      "shelf-life": "La fecha de vencimiento es hoy más la vida útil.",
+      "decimals": "Hasta {{max}} decimales.",
+      "unit-cost": "Precio de una unidad (kg, L, unidad)."
+    },
+    "placeholders": {
+      "name": "Ej. Pechuga de pollo",
+      "unit": "kg, L, unidad"
+    },
+    "storage": {
+      "AMBIENT": "Ambiente",
+      "REFRIGERATED": "Refrigerado",
+      "FROZEN": "Congelado"
+    },
+    "status": {
+      "AVAILABLE": "Disponible",
+      "LOW": "Stock bajo",
+      "CRITICAL": "Crítico",
+      "EXPIRED": "Vencido"
+    },
+    "delete-question": "Se eliminará del inventario el insumo:",
+    "delete-accept": "Sí, eliminar",
+    "lot-preferred": "Se usa primero en ventas",
+    "lot-of": "1 de {{count}} lotes",
+    "stock-value": "Stock: {{value}}"
+  },
+  "recipes": {
+    "title": "Recetas",
+    "description": "Vincula insumos a cada plato para que el stock se descuente al venderse. \"Vender uno\" registra una venta real; si algún insumo no alcanza, la venta se rechaza y el stock no cambia.",
+    "table-label": "Recetas",
+    "empty": "Aún no registras recetas.",
+    "new": "Nueva receta",
+    "edit": "Editar receta",
+    "save": "Guardar receta",
+    "created": "Se creó la receta {{name}}.",
+    "updated": "Se actualizó la receta {{name}}.",
+    "deleted": "Se eliminó la receta {{name}}.",
+    "delete-title": "¿Eliminar esta receta?",
+    "sell": "Vender uno",
+    "sell-dish": "Vender un {{name}}",
+    "sold": "{{dish}} vendido por {{total}}.",
+    "sold-detail": "La venta está en el historial de ventas y sus insumos se descontaron.",
+    "ingredients-of": "Ingredientes de {{name}}",
+    "add-ingredient": "Agregar un ingrediente",
+    "remove-line": "Quitar {{name}} de la receta",
+    "columns": {
+      "dish": "Plato",
+      "ingredients": "Ingredientes",
+      "price": "Precio del plato",
+      "cost": "Costo"
+    },
+    "fields": {
+      "dish-name": "Nombre del plato",
+      "supply": "Insumo",
+      "quantity": "Cantidad",
+      "required-quantity": "Cantidad requerida"
+    },
+    "placeholders": {
+      "dish-name": "Ej. Pizza Margarita",
+      "supply": "Selecciona un insumo…"
+    },
+    "errors": {
+      "line": "Elige un insumo.",
+      "no-ingredients": "Agrega al menos un ingrediente.",
+      "incomplete": "La receta necesita el nombre del plato y al menos un ingrediente."
+    },
+    "delete-question": "Se eliminará la receta:",
+    "delete-accept": "Sí, eliminar",
+    "price-note": "Suma de ingredientes",
+    "dish-price": "Precio del plato (suma de ingredientes)",
+    "availability": {
+      "ready": "Lista para vender",
+      "no-stock": "Stock insuficiente",
+      "expired": "Insumo vencido"
+    },
+    "blocked": {
+      "title": "Venta no procesada",
+      "lead": "\"{{dish}}\" no se puede vender en este momento:",
+      "note": "No se registró ninguna venta en el historial y el stock no cambió.",
+      "go-inventory": "Ir al inventario",
+      "ok": "Entendido"
+    },
+    "shortage": {
+      "NOT_FOUND": "Este insumo ya no está en el inventario.",
+      "EXPIRED": "El lote disponible está vencido. Los productos vencidos no se pueden vender.",
+      "INSUFFICIENT": "No hay stock suficiente.",
+      "numbers": "Necesario: {{required}} · Utilizable: {{available}}"
+    }
+  },
+  "sales": {
+    "title": "Historial de ventas",
+    "description": "Histórico de ventas confirmadas y anuladas, los datos de los que aprende la predicción de demanda.",
+    "summary": "Resumen de ventas",
+    "registered": "Ventas registradas",
+    "revenue": "Ingresos totales del período (ventas confirmadas)",
+    "table-label": "Ventas",
+    "empty": "Aún no hay ventas. Usa \"Vender uno\" en Recetas para registrar la primera.",
+    "void": "Anular",
+    "void-sale": "Anular la venta de {{dishes}}",
+    "void-title": "Anular venta",
+    "void-confirm": "¿Anular la venta de {{dishes}}? Los insumos ya usados no vuelven al stock.",
+    "voided": "La venta se anuló.",
+    "columns": {
+      "date": "Fecha",
+      "channel": "Canal",
+      "dishes": "Platos vendidos",
+      "total": "Total",
+      "status": "Estado"
+    },
+    "channel": {
+      "POS": "Punto de venta",
+      "MANUAL": "Registro manual"
+    },
+    "status": {
+      "CONFIRMED": "Confirmada",
+      "VOIDED": "Anulada"
+    },
+    "errors": {
+      "recipe-not-found": "No se encontró la receta a vender.",
+      "already-voided": "La venta ya está anulada.",
+      "cannot-sell": "\"{{dish}}\" no se puede vender: falta un insumo, no alcanza o está vencido."
+    }
+  },
+  "forecast": {
+    "title": "Predicción de demanda",
+    "description": "Unidades por plato para los próximos 7 días, predichas por un modelo de Machine Learning con el historial de ventas, feriados, quincenas y el pronóstico del clima.",
+    "generate": "Generar nueva predicción (IA)",
+    "generating": "Generando…",
+    "generated": "Se generó una nueva predicción.",
+    "empty": "Aún no hay predicciones. Usa el botón de arriba para generar la primera.",
+    "summary": "Resumen de la predicción",
+    "confidence": "Confianza del modelo",
+    "weather-label": "Clima",
+    "generated-at": "Generada",
+    "units-per-day": "Unidades proyectadas por día",
+    "chart-label": "Unidades proyectadas para cada uno de los próximos 7 días",
+    "units": "unidades",
+    "weather": {
+      "sunny": "Soleado",
+      "cloudy": "Nublado",
+      "light-rain": "Lluvia ligera",
+      "rain": "Lluvia",
+      "drizzle": "Llovizna"
+    },
+    "method-label": "Método",
+    "method": {
+      "ml": "Modelo ML v{{version}}",
+      "baseline": "Promedio semanal (poco historial)"
+    },
+    "weather-source": {
+      "open-meteo": "Clima: pronóstico de Open-Meteo",
+      "climatology": "Clima: climatología de Lima"
+    },
+    "errors": {
+      "no-dishes": "Crea al menos una receta antes de generar una predicción."
+    },
+    "per-dish": "Detalle por plato",
+    "temperature": "{{temp}} °C · {{rain}} mm"
+  },
+  "alerts": {
+    "title": "Alertas",
+    "description": "Notificaciones de stock bajo, vencimientos y fallas de equipo enviadas por WhatsApp y correo. Las alertas críticas deben llegar por ambos canales.",
+    "table-label": "Alertas",
+    "empty": "No hay alertas registradas.",
+    "pending-none": "Sin alertas pendientes",
+    "pending-one": "{{count}} alerta pendiente",
+    "pending": "{{count}} alertas pendientes",
+    "new": "Nueva alerta",
+    "edit": "Editar alerta",
+    "create": "Crear alerta",
+    "created": "Se creó la alerta.",
+    "updated": "Se actualizó la alerta.",
+    "deleted": "Se eliminó la alerta.",
+    "delete-title": "Eliminar alerta",
+    "delete-confirm": "¿Eliminar la alerta \"{{message}}\"?",
+    "delivered-none": "Entregada",
+    "delivered-one": "Entregada (1 canal)",
+    "delivered": "Entregada ({{count}} canales)",
+    "missing-channel": "Falta {{channel}}",
+    "retry": "Reintentar entrega",
+    "retry-on": "Reintentar la entrega por {{channel}} de la alerta {{message}}",
+    "retried": "Entregada por {{channel}}.",
+    "acknowledge": "Marcar atendida",
+    "acknowledge-alert": "Marcar como atendida la alerta {{message}}",
+    "acknowledged": "La alerta se marcó como atendida.",
+    "attended": "Atendida",
+    "columns": {
+      "type": "Tipo",
+      "message": "Mensaje",
+      "severity": "Severidad",
+      "delivery": "Entrega",
+      "date": "Fecha"
+    },
+    "fields": {
+      "type": "Tipo",
+      "severity": "Severidad",
+      "message": "Mensaje",
+      "channel": "Canal principal"
+    },
+    "hints": {
+      "critical-channels": "Las alertas críticas se entregan por WhatsApp y correo."
+    },
+    "placeholders": {
+      "message": "Ej. Lechuga por debajo del stock mínimo"
+    },
+    "type": {
+      "LOW_STOCK": "Stock bajo",
+      "EXPIRING_SOON": "Por vencer",
+      "IOT_FAULT": "Falla de equipo (IoT)",
+      "CRITICAL_STOCK": "Stock crítico"
+    },
+    "severity": {
+      "INFO": "Informativa",
+      "WARNING": "Advertencia",
+      "CRITICAL": "Crítica"
+    },
+    "channel": {
+      "WHATSAPP": "WhatsApp",
+      "EMAIL": "Correo"
+    },
+    "errors": {
+      "not-delivered": "La alerta debe entregarse por todos los canales requeridos antes de marcarse como atendida."
+    }
+  },
+  "recommendations": {
+    "title": "Recomendaciones automáticas",
+    "description": "Sugerencias de ajuste de menú y de compras según popularidad y estacionalidad.",
+    "table-label": "Recomendaciones",
+    "empty": "No hay recomendaciones por ahora.",
+    "apply": "Aplicar",
+    "apply-item": "Aplicar la recomendación {{message}}",
+    "applied": "Aplicada",
+    "applied-toast": "Se aplicó la recomendación.",
+    "columns": {
+      "type": "Tipo",
+      "recommendation": "Recomendación",
+      "impact": "Impacto esperado"
+    },
+    "type": {
+      "MENU_ADJUSTMENT": "Ajuste de menú",
+      "PURCHASE_SUGGESTION": "Sugerencia de compra"
+    }
+  },
+  "plans": {
+    "title": "Mejorar plan",
+    "description": "Compara los planes y paga o renueva tu suscripción con Stripe o PayPal.",
+    "catalog": "Planes disponibles",
+    "active": "Plan activo: {{plan}}",
+    "current": "Tu plan actual",
+    "renews-on": "Tu suscripción se renueva el {{date}}.",
+    "most-popular": "Más popular",
+    "per-month": "/mes",
+    "pay-with": "Pagar con {{provider}}",
+    "pay-plan-with": "Pagar el plan {{plan}} con {{provider}}",
+    "activated": "✓ Suscripción activada: plan {{plan}}.",
+    "simulated-note": "Pago simulado: no se procesan cobros reales.",
+    "processing": "Procesando…"
+  },
+  "dashboard": {
+    "greeting": "Hola, {{name}}",
+    "team": "equipo",
+    "description": "Resumen operativo de {{restaurant}}.",
+    "your-restaurant": "tu restaurante",
+    "indicators": "Indicadores clave",
+    "registered-items": "Insumos registrados",
+    "low-critical": "Stock bajo o crítico",
+    "expiring-soon": "Vencen en 3 días o menos",
+    "inventory-value": "Valor del inventario",
+    "critical-items": "Insumos críticos",
+    "no-critical-items": "Sin insumos en estado crítico.",
+    "recent-alerts": "Alertas recientes",
+    "no-alerts": "Sin alertas.",
+    "see-all-alerts": "Ver todas las alertas",
+    "projected-demand": "Demanda proyectada (IA) para los próximos días",
+    "revenue-today": "Ingresos de hoy",
+    "pending-alerts": "Alertas pendientes",
+    "confirmed-sales": "Ventas confirmadas",
+    "projected-units": "Unidades proyectadas (7 días)",
+    "expired": "Insumos vencidos",
+    "confidence": "Confianza {{value}}%"
+  },
+  "access": {
+    "denied": "Acceso denegado",
+    "denied-detail": "Tu rol no tiene acceso a esta sección. Solicítalo a un Administrador.",
+    "session-required": "Inicia sesión para continuar",
+    "session-required-detail": "Necesitas una sesión activa para abrir esa página.",
+    "session-expired": "Tu sesión expiró"
+  },
+  "settings": {
+    "hub": {
+      "description": "Administra tu cuenta, obtén ayuda, mejora tu plan o cierra sesión.",
+      "settings-account": "Perfil, restaurante, suscripción y contraseña.",
+      "settings-help": "Guía paso a paso y preguntas frecuentes.",
+      "settings-plans": "Compara los planes y cambia tu suscripción.",
+      "sign-out": "Cierra tu sesión en este dispositivo."
+    },
+    "account": {
+      "description": "Tus datos de perfil, los datos del restaurante, el tipo de suscripción y tu contraseña."
+    },
+    "profile": {
+      "title": "Datos del perfil",
+      "description": "Tu nombre y el correo con el que inicias sesión.",
+      "saved": "Perfil actualizado.",
+      "error": "No se pudo guardar el perfil."
+    },
+    "restaurant": {
+      "title": "Datos del restaurante",
+      "description": "Nombre, dirección y teléfono compartidos por todo el equipo.",
+      "read-only": "Solo un Administrador puede editar los datos del restaurante.",
+      "saved": "Datos del restaurante actualizados.",
+      "error": "No se pudieron guardar los datos del restaurante."
+    },
+    "password": {
+      "title": "Cambiar contraseña",
+      "description": "Primero confirma tu contraseña actual y luego escribe la nueva dos veces.",
+      "current": "Contraseña actual",
+      "new": "Nueva contraseña",
+      "submit": "Cambiar contraseña",
+      "saved": "Tu contraseña fue cambiada.",
+      "error": "No se cambió la contraseña"
+    },
+    "subscription": {
+      "title": "Tipo de suscripción",
+      "description": "El plan al que está suscrito tu restaurante.",
+      "plan": "Plan",
+      "price": "Precio",
+      "status": "Estado",
+      "renewal": "Se renueva el",
+      "payment": "Método de pago",
+      "none": "Aún sin plan",
+      "statuses": {
+        "ACTIVE": "Activa",
+        "PAST_DUE": "Pago pendiente",
+        "CANCELED": "Cancelada"
+      }
+    }
+  },
+  "help": {
+    "description": "Una guía rápida del flujo de StockIA y respuestas a las preguntas más comunes.",
+    "guide-title": "Cómo funciona StockIA, paso a paso",
+    "guide-intro": "Sigue estos pasos en orden la primera vez. Cada uno termina con un enlace a la sección.",
+    "go-to": "Ir a {{section}}",
+    "steps": {
+      "inventory": {
+        "title": "Registra tus insumos",
+        "body": "En Inventario, crea cada insumo con su unidad, cantidad actual, stock mínimo, vida útil y precio unitario. La fecha de vencimiento se calcula con la vida útil.",
+        "tip": "Las cantidades aceptan hasta 32 decimales, p. ej. 0.125 kg."
+      },
+      "recipes": {
+        "title": "Crea las recetas de tus platos",
+        "body": "En Recetas, agrega los insumos que usa cada plato y la cantidad por porción. El precio del plato es la suma del costo de esos ingredientes.",
+        "tip": "Si cambia el precio unitario de un insumo, el precio del plato se actualiza solo."
+      },
+      "sell": {
+        "title": "Vende un plato",
+        "body": "Presiona \"Vender uno\" en una receta. StockIA revisa el stock primero y descuenta los insumos solo si todos los ingredientes están disponibles y no vencidos.",
+        "tip": "Si falta un insumo o está vencido, la venta no se registra y un mensaje explica por qué."
+      },
+      "sales": {
+        "title": "Revisa el historial de ventas",
+        "body": "El historial de ventas lista cada venta confirmada, de la más reciente a la más antigua. Una venta se puede anular, pero los insumos usados no regresan al stock.",
+        "tip": "El historial es el dato con el que aprende la predicción de demanda."
+      },
+      "alerts": {
+        "title": "Atiende las alertas",
+        "body": "Las alertas te avisan de stock bajo, stock crítico e insumos por vencer, por WhatsApp y correo.",
+        "tip": "Una alerta crítica debe llegar por ambos canales antes de marcarla como atendida."
+      },
+      "forecast": {
+        "title": "Consulta la predicción de demanda",
+        "body": "La predicción de demanda proyecta los platos que venderás en los próximos días, para que compres a tiempo.",
+        "tip": "Genera una nueva predicción después de registrar varias ventas."
+      },
+      "recommendations": {
+        "title": "Aplica las recomendaciones",
+        "body": "Las recomendaciones sugieren compras y ajustes de menú según la predicción y las alertas.",
+        "tip": "Solo el Administrador ve y aplica recomendaciones."
+      },
+      "team": {
+        "title": "Invita a tu equipo",
+        "body": "En Roles y permisos, invita miembros como Administradores o Empleados y cambia su rol cuando sea necesario.",
+        "tip": "El equipo siempre conserva al menos un Administrador."
+      },
+      "settings": {
+        "title": "Ajusta tu cuenta",
+        "body": "En Configuraciones › Ajustes, edita tu perfil y los datos del restaurante y cambia tu contraseña.",
+        "tip": "Para cambiar la contraseña primero debes escribir la actual."
+      }
+    },
+    "roles-title": "Qué puede hacer cada rol",
+    "roles-feature": "Funcionalidad",
+    "roles-rows": {
+      "operation": "Panel, inventario, recetas, ventas, predicción, alertas y ayuda",
+      "recommendations": "Recomendaciones",
+      "team": "Roles y permisos",
+      "subscription": "Tipo de suscripción y Mejorar plan"
+    },
+    "yes": "Sí",
+    "no": "No",
+    "faq-title": "Preguntas frecuentes",
+    "faq-search": "Buscar preguntas",
+    "faq-results-none": "No se encontraron preguntas",
+    "faq-results-one": "Se encontró 1 pregunta",
+    "faq-results": "Se encontraron {{count}} preguntas",
+    "faq-empty": "Ninguna pregunta coincide con tu búsqueda.",
+    "faq": {
+      "no-stock": {
+        "q": "¿Por qué no se registró mi venta?",
+        "a": "Porque falta un insumo de la receta o no alcanza la cantidad necesaria. StockIA nunca vende sin stock: la venta no se guarda en el historial y el stock no cambia."
+      },
+      "expired": {
+        "q": "¿Puedo vender un plato cuyo insumo está vencido?",
+        "a": "No. Los lotes vencidos nunca se usan. Si el único stock de un insumo está vencido, la venta se rechaza y el mensaje indica qué insumo venció."
+      },
+      "freshest": {
+        "q": "¿Qué pasa si tengo dos lotes del mismo insumo?",
+        "a": "Registra cada lote como un insumo con el mismo nombre y unidad. Al vender, StockIA omite los lotes vencidos y usa primero el más fresco; el inventario lo marca como \"Se usa primero en ventas\"."
+      },
+      "dish-price": {
+        "q": "¿Cómo se calcula el precio de un plato?",
+        "a": "Es la suma de la cantidad por porción de cada ingrediente multiplicada por su precio unitario en el inventario. La venta se registra con ese precio."
+      },
+      "decimals": {
+        "q": "¿Cuántos decimales puede tener una cantidad?",
+        "a": "Hasta 32 decimales, tanto en el inventario como en las recetas. Puedes usar punto o coma como separador decimal."
+      },
+      "void": {
+        "q": "Si anulo una venta, ¿regresa el stock?",
+        "a": "No. La venta anulada queda en el historial como anulada y los insumos ya usados no se devuelven."
+      },
+      "critical-alert": {
+        "q": "¿Por qué no puedo marcar una alerta crítica como atendida?",
+        "a": "Las alertas críticas deben enviarse primero por WhatsApp y por correo. Reintenta el canal que falta y luego márcala como atendida."
+      },
+      "roles": {
+        "q": "¿Qué no puede ver un Empleado?",
+        "a": "Los Empleados no pueden abrir Roles y permisos, Recomendaciones, el tipo de suscripción ni Mejorar plan. Todo lo demás está disponible."
+      },
+      "password": {
+        "q": "¿Cómo cambio mi contraseña?",
+        "a": "Ve a Configuraciones › Ajustes › Cambiar contraseña, escribe tu contraseña actual y luego la nueva dos veces."
+      },
+      "language": {
+        "q": "¿Cómo cambio el idioma?",
+        "a": "Usa los botones EN / ES del encabezado. StockIA siempre abre en inglés."
+      }
+    }
+  },
+  "savings": {
+    "title": "Ahorro semanal",
+    "period": "Del {{from}} al {{to}}",
+    "estimated": "Ahorro estimado",
+    "estimated-note": "Stock rescatado más la merma que bajó frente a la semana pasada",
+    "rescued": "Stock rescatado",
+    "rescued-note": "Usado en ventas en sus últimos 3 días antes de vencer",
+    "waste": "Merma de la semana",
+    "waste-down": "{{amount}} menos que la semana pasada",
+    "waste-up": "{{amount}} más que la semana pasada",
+    "waste-same": "Igual que la semana pasada",
+    "sales": "Ventas de la semana",
+    "portions-one": "{{count}} porción vendida",
+    "portions": "{{count}} porciones vendidas",
+    "top-rescued": "Insumos más rescatados",
+    "wasted": "Vencidos con stock",
+    "none-rescued": "Esta semana no se rescató stock.",
+    "none-wasted": "Esta semana no venció nada con stock."
+  },
+  "not-found": {
+    "title": "Página no encontrada",
+    "description": "La página {{path}} no existe o fue movida.",
+    "back": "Ir al dashboard"
+  },
+  "terms": {
+    "title": "Términos del servicio",
+    "updated": "Última actualización: noviembre de 2026",
+    "intro": "Estos términos explican cómo DataBit ofrece StockIA a los restaurantes. Al crear una cuenta los aceptas.",
+    "sections": {
+      "service": {
+        "title": "El servicio",
+        "body": "StockIA ayuda a los restaurantes a gestionar lotes de insumos, recetas, ventas, alertas y predicciones de demanda. Las predicciones y recomendaciones son estimaciones y no reemplazan el criterio del restaurante."
+      },
+      "accounts": {
+        "title": "Cuentas y roles",
+        "body": "El dueño del restaurante es su primer Administrador y responde por los miembros que invita. Mantén tu contraseña en privado; tras 5 contraseñas incorrectas la cuenta se bloquea 15 minutos."
+      },
+      "data": {
+        "title": "Datos y privacidad",
+        "body": "Los datos de cada restaurante solo los ve su equipo. Los usamos para operar el servicio y para entrenar el modelo de demanda con ventas agregadas y anónimas; no los vendemos."
+      },
+      "payments": {
+        "title": "Planes y pagos",
+        "body": "El plan Esencial es gratuito. Los planes de pago se renuevan cada 30 días. En esta versión académica los pagos con Stripe y PayPal son simulados y no se realizan cobros reales."
+      },
+      "predictions": {
+        "title": "Predicciones y decisiones automatizadas",
+        "body": "Las predicciones de demanda provienen de un modelo de aprendizaje automático entrenado con las ventas del propio restaurante, el calendario peruano y el clima. Son estimaciones con un nivel de confianza indicado: StockIA las muestra como sugerencias y nunca compra, descarta ni cambia el stock sin la acción de una persona, salvo el descuento de una venta que registra el equipo."
+      },
+      "ethics": {
+        "title": "Responsabilidad profesional y ética",
+        "body": "DataBit desarrolla StockIA siguiendo el Código de Ética y Práctica Profesional de la Ingeniería de Software (ACM/IEEE) y el Código de Ética del Colegio de Ingenieros del Perú (CIP): actuamos en favor del interés público y de nuestros clientes, somos transparentes sobre los límites del producto (por ejemplo, qué funciones son simuladas en esta versión), protegemos la confidencialidad de los datos que se nos confían y reportamos y corregimos los defectos que encontramos."
+      },
+      "availability": {
+        "title": "Disponibilidad y cambios",
+        "body": "Trabajamos para mantener el servicio disponible, pero puede interrumpirse por mantenimiento o fallas. Si estos términos cambian, publicaremos la nueva versión en esta página con su fecha antes de que se aplique."
+      },
+      "contact": {
+        "title": "Contacto",
+        "body": "Escribe a soporte@databitecorp.com para consultas sobre estos términos."
+      }
+    }
+  }
+}

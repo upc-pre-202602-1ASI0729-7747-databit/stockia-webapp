@@ -1,0 +1,762 @@
+{
+  "app": {
+    "document-title": "StockIA — Restaurant Inventory",
+    "skip-to-content": "Skip to main content"
+  },
+  "language": {
+    "switcher": "Language",
+    "en": "English (United States)",
+    "es": "Spanish (Latin America)"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "inventory": "Inventory",
+    "recipes": "Recipes",
+    "sales": "Sales history",
+    "forecast": "Demand forecast",
+    "alerts": "Alerts",
+    "recommendations": "Recommendations",
+    "roles": "Roles & permissions",
+    "settings": "Settings",
+    "settings-account": "Account settings",
+    "settings-help": "Get help",
+    "settings-plans": "Upgrade plan",
+    "sign-out": "Sign out"
+  },
+  "layout": {
+    "sidebar": "StockIA sidebar",
+    "main-navigation": "Main navigation",
+    "open-menu": "Open navigation menu",
+    "environment-tag": "Spring Boot API",
+    "close-menu": "Close navigation menu",
+    "go-home": "StockIA, go to the dashboard",
+    "open-settings": "Account settings of {{name}}",
+    "user-menu": "User menu",
+    "language-of": "Change language"
+  },
+  "footer": {
+    "made-by": "Made by the {{team}} team.",
+    "data-source": "Data served by the StockIA Platform RESTful API (Spring Boot + MySQL).",
+    "terms": "Terms of service",
+    "rights": "© {{year}} DataBit · StockIA"
+  },
+  "common": {
+    "actions": "Actions",
+    "add": "Add",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete-item": "Delete {{name}}",
+    "edit": "Edit",
+    "edit-item": "Edit {{name}}",
+    "loading": "Loading…",
+    "save": "Save",
+    "save-changes": "Save changes",
+    "saving": "Saving…",
+    "cannot-undo": "This action cannot be undone.",
+    "close": "Close",
+    "retry": "Try again",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back"
+  },
+  "errors": {
+    "load": "The data could not be loaded. Check your connection and try again.",
+    "save": "The changes could not be saved. Try again.",
+    "delete": "The record could not be deleted. Try again.",
+    "network": "The service is not responding. Wait a few seconds and try again."
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter a valid email address (e.g. name@restaurant.com).",
+    "min-length": "Use at least {{min}} characters.",
+    "min-value": "Enter a value of {{min}} or more.",
+    "password-strength": "Use at least {{min}} characters, with letters and numbers.",
+    "passwords-match": "The passwords do not match.",
+    "phone": "Enter a valid phone number.",
+    "decimal": "Enter a number with up to {{max}} decimals (e.g. 0.125).",
+    "positive": "Enter a quantity greater than 0."
+  },
+  "fields": {
+    "full-name": "Full name",
+    "restaurant-name": "Restaurant name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "confirm-password": "Confirm password",
+    "show-password": "Show password",
+    "hide-password": "Hide password",
+    "required-legend": "Fields marked with * are required.",
+    "restaurant-address": "Restaurant address",
+    "restaurant-phone": "Restaurant phone"
+  },
+  "placeholders": {
+    "full-name": "Your full name",
+    "restaurant-name": "Your restaurant name",
+    "email": "you@restaurant.com",
+    "team-email": "name@restaurant.com",
+    "password": "Your password",
+    "restaurant-address": "e.g. Av. Larco 123, Miraflores",
+    "restaurant-phone": "e.g. +51 987 654 321"
+  },
+  "auth": {
+    "about-stockia": "About StockIA",
+    "password-rule": "At least {{min}} characters, with letters and numbers.",
+    "highlights": {
+      "deduction": "Supplies are discounted automatically for every dish sold",
+      "forecast": "Demand forecast with AI and weather variables",
+      "alerts": "Low-stock and expiration alerts by WhatsApp and email",
+      "admin-role": "Administrator role with full access",
+      "invite-team": "Invite your team later as Employees",
+      "free-plan": "No credit card needed for the Essential plan"
+    },
+    "sign-in": {
+      "headline": "Smart inventory for your restaurant",
+      "description": "Operations dashboard, demand forecast and alerts in one place.",
+      "title": "Sign in",
+      "subtitle": "Access your StockIA panel",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "no-account": "Don't have an account?",
+      "go-to-sign-up": "Sign up",
+      "demo-title": "Demo accounts (password stockia123):",
+      "forgot-password": "Forgot your password?",
+      "attempts-left": "Attempts left before the account is locked: {{remaining}} of {{max}}.",
+      "locked-until": "Locked until {{time}}."
+    },
+    "sign-up": {
+      "headline": "Set up your restaurant in minutes",
+      "description": "Create your administrator account and start registering supplies, recipes and your team.",
+      "title": "Create account",
+      "subtitle": "Sign up for StockIA",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "has-account": "Already have an account?",
+      "go-to-sign-in": "Sign in",
+      "error": "The account could not be created. Try again.",
+      "welcome": "Welcome to StockIA, {{name}}!"
+    },
+    "errors": {
+      "check-fields": "Check the form",
+      "access-denied": "Access denied",
+      "sign-up-failed": "The account was not created"
+    },
+    "forgot": {
+      "headline": "Recover your access",
+      "description": "We will email you a link to choose a new password.",
+      "title": "Forgot your password?",
+      "subtitle": "Enter the email of your StockIA account",
+      "submit": "Send recovery link",
+      "sent": "If {{email}} is registered, we sent it a link to reset the password.",
+      "demo-title": "Demo mode: copy of the email (the provider is simulated)",
+      "demo-code": "Code {{code}}",
+      "open-link": "Open the recovery link",
+      "back": "Back to sign in",
+      "error": "The link could not be sent",
+      "highlights": {
+        "link": "A recovery link is sent to your email",
+        "expires": "The link expires in 30 minutes",
+        "unlock": "Resetting the password also unlocks your account"
+      }
+    },
+    "reset": {
+      "headline": "Choose a new password",
+      "description": "Use the code of the recovery link we emailed you.",
+      "title": "New password",
+      "code": "6-digit code",
+      "new-password": "New password",
+      "confirm-password": "Confirm the new password",
+      "submit": "Save new password",
+      "new-link": "Request a new link",
+      "code-invalid": "Enter the 6-digit code of the link.",
+      "done": "Password updated",
+      "done-detail": "Sign in with your new password.",
+      "error": "The password was not changed"
+    },
+    "terms-notice": "By creating an account you accept the",
+    "terms-link": "Terms of service"
+  },
+  "iam": {
+    "roles": {
+      "ADMIN": "Administrator",
+      "EMPLOYEE": "Employee"
+    },
+    "errors": {
+      "invalid-credentials": "Incorrect email or password.",
+      "no-session": "Your session expired. Sign in again.",
+      "last-admin": "The team must keep at least one Administrator.",
+      "remove-self": "You cannot remove your own account from the team.",
+      "email-taken": "That email is already registered. Sign in or use another one.",
+      "wrong-current-password": "The current password is not correct.",
+      "same-password": "The new password must be different from the current one.",
+      "admin-only": "Only an Administrator can do this.",
+      "account-locked": "Your account is locked for {{minutes}} more minute(s) after 5 wrong passwords. Try again later or reset your password.",
+      "invalid-credentials-attempts": "Incorrect email or password. Attempts left before the account is locked: {{count}}.",
+      "invalid-reset-code": "The recovery link is not valid or has expired. Request a new one."
+    }
+  },
+  "team": {
+    "title": "Team and roles",
+    "description": "Assign the Administrator or Employee role to each team member, invite new members or remove them.",
+    "table-label": "Team members",
+    "empty": "No team members registered yet.",
+    "you": "You",
+    "invite": "Invite member",
+    "invite-title": "Invite a team member",
+    "send-invite": "Send invitation",
+    "temporary-password": "The member is created with the temporary password {{password}}; a real API would send an invitation email.",
+    "invited": "{{name}} was invited to the team.",
+    "invite-error": "The member could not be invited. Try again.",
+    "role-of": "Role of {{name}}",
+    "role-changed": "{{name}} is now {{role}}.",
+    "remove-of": "Remove {{name}} from the team",
+    "remove-title": "Remove member",
+    "remove-confirm": "Remove {{name}} from the team?",
+    "removed": "{{name}} was removed from the team.",
+    "locked": "Locked",
+    "locked-hint": "Locked by 5 wrong passwords",
+    "unlock": "Unlock",
+    "unlock-of": "Unlock {{name}}",
+    "unlocked": "{{name}} can sign in again."
+  },
+  "inventory": {
+    "title": "Inventory",
+    "description": "Register, edit and delete your supplies. Quantities are discounted automatically when a dish linked by recipe is sold.",
+    "table-label": "Supplies",
+    "empty": "You have not registered supplies yet. Create the first one with \"New supply\".",
+    "new": "New supply",
+    "edit": "Edit supply",
+    "created": "{{name}} was added to the inventory.",
+    "updated": "{{name}} was updated.",
+    "deleted": "{{name}} was deleted.",
+    "delete-title": "Delete this supply?",
+    "columns": {
+      "item": "Supply",
+      "quantity": "Quantity",
+      "min-threshold": "Minimum",
+      "storage": "Storage",
+      "expires": "Expires",
+      "status": "Status",
+      "unit-price": "Unit price"
+    },
+    "fields": {
+      "name": "Supply name",
+      "unit": "Unit",
+      "storage": "Storage type",
+      "quantity": "Current quantity",
+      "min-threshold": "Minimum stock",
+      "shelf-life": "Shelf life (days)",
+      "unit-cost": "Unit price (S/)"
+    },
+    "hints": {
+      "min-threshold": "At or below this quantity the supply shows as low stock.",
+      "shelf-life": "The expiration date is today plus the shelf life.",
+      "decimals": "Up to {{max}} decimals.",
+      "unit-cost": "Price of one unit (kg, L, unit)."
+    },
+    "placeholders": {
+      "name": "e.g. Chicken breast",
+      "unit": "kg, L, unit"
+    },
+    "storage": {
+      "AMBIENT": "Room temperature",
+      "REFRIGERATED": "Refrigerated",
+      "FROZEN": "Frozen"
+    },
+    "status": {
+      "AVAILABLE": "Available",
+      "LOW": "Low stock",
+      "CRITICAL": "Critical",
+      "EXPIRED": "Expired"
+    },
+    "delete-question": "The supply will be removed from the inventory:",
+    "delete-accept": "Yes, delete",
+    "lot-preferred": "Used first in sales",
+    "lot-of": "1 of {{count}} lots",
+    "stock-value": "Stock: {{value}}"
+  },
+  "recipes": {
+    "title": "Recipes",
+    "description": "Link supplies to each dish so stock is discounted when it is sold. \"Sell one\" registers a real sale; if any supply is short, the sale is rejected and the stock does not change.",
+    "table-label": "Recipes",
+    "empty": "You have not registered recipes yet.",
+    "new": "New recipe",
+    "edit": "Edit recipe",
+    "save": "Save recipe",
+    "created": "The recipe {{name}} was created.",
+    "updated": "The recipe {{name}} was updated.",
+    "deleted": "The recipe {{name}} was deleted.",
+    "delete-title": "Delete this recipe?",
+    "sell": "Sell one",
+    "sell-dish": "Sell one {{name}}",
+    "sold": "{{dish}} sold for {{total}}.",
+    "sold-detail": "The sale is in the sales history and its supplies were discounted.",
+    "ingredients-of": "Ingredients of {{name}}",
+    "add-ingredient": "Add an ingredient",
+    "remove-line": "Remove {{name}} from the recipe",
+    "columns": {
+      "dish": "Dish",
+      "ingredients": "Ingredients",
+      "price": "Dish price",
+      "cost": "Cost"
+    },
+    "fields": {
+      "dish-name": "Dish name",
+      "supply": "Supply",
+      "quantity": "Quantity",
+      "required-quantity": "Required quantity"
+    },
+    "placeholders": {
+      "dish-name": "e.g. Margherita pizza",
+      "supply": "Choose a supply…"
+    },
+    "errors": {
+      "line": "Choose a supply.",
+      "no-ingredients": "Add at least one ingredient.",
+      "incomplete": "The recipe needs a dish name and at least one ingredient."
+    },
+    "delete-question": "The recipe will be deleted:",
+    "delete-accept": "Yes, delete",
+    "price-note": "Sum of ingredients",
+    "dish-price": "Dish price (sum of ingredients)",
+    "availability": {
+      "ready": "Ready to sell",
+      "no-stock": "Not enough stock",
+      "expired": "Expired supply"
+    },
+    "blocked": {
+      "title": "Sale not processed",
+      "lead": "\"{{dish}}\" cannot be sold right now:",
+      "note": "No sale was registered in the history and the stock did not change.",
+      "go-inventory": "Go to inventory",
+      "ok": "Understood"
+    },
+    "shortage": {
+      "NOT_FOUND": "This supply is no longer in the inventory.",
+      "EXPIRED": "The available lot is expired. Expired products cannot be sold.",
+      "INSUFFICIENT": "There is not enough stock.",
+      "numbers": "Needed: {{required}} · Usable: {{available}}"
+    }
+  },
+  "sales": {
+    "title": "Sales history",
+    "description": "History of confirmed and voided sales, the data the demand forecast learns from.",
+    "summary": "Sales summary",
+    "registered": "Registered sales",
+    "revenue": "Total revenue for the period (confirmed sales)",
+    "table-label": "Sales",
+    "empty": "No sales yet. Use \"Sell one\" in Recipes to register the first one.",
+    "void": "Void",
+    "void-sale": "Void the sale of {{dishes}}",
+    "void-title": "Void sale",
+    "void-confirm": "Void the sale of {{dishes}}? Supplies already used are not returned to stock.",
+    "voided": "The sale was voided.",
+    "columns": {
+      "date": "Date",
+      "channel": "Channel",
+      "dishes": "Dishes sold",
+      "total": "Total",
+      "status": "Status"
+    },
+    "channel": {
+      "POS": "Point of sale",
+      "MANUAL": "Manual entry"
+    },
+    "status": {
+      "CONFIRMED": "Confirmed",
+      "VOIDED": "Voided"
+    },
+    "errors": {
+      "recipe-not-found": "The recipe to sell was not found.",
+      "already-voided": "The sale is already voided.",
+      "cannot-sell": "\"{{dish}}\" cannot be sold: a supply is missing, short or expired."
+    }
+  },
+  "forecast": {
+    "title": "Demand forecast",
+    "description": "Units per dish for the next 7 days, predicted by a Machine Learning model with the sales history, holidays, paydays and the weather forecast.",
+    "generate": "Generate new forecast (AI)",
+    "generating": "Generating…",
+    "generated": "A new forecast was generated.",
+    "empty": "No forecasts yet. Use the button above to generate the first one.",
+    "summary": "Forecast summary",
+    "confidence": "Model confidence",
+    "weather-label": "Weather",
+    "generated-at": "Generated",
+    "units-per-day": "Projected units per day",
+    "chart-label": "Projected units for each of the next 7 days",
+    "units": "units",
+    "weather": {
+      "sunny": "Sunny",
+      "cloudy": "Cloudy",
+      "light-rain": "Light rain",
+      "rain": "Rain",
+      "drizzle": "Drizzle"
+    },
+    "method-label": "Method",
+    "method": {
+      "ml": "ML model v{{version}}",
+      "baseline": "Weekly average (little history)"
+    },
+    "weather-source": {
+      "open-meteo": "Weather: Open-Meteo forecast",
+      "climatology": "Weather: Lima climatology"
+    },
+    "errors": {
+      "no-dishes": "Create at least one recipe before generating a forecast."
+    },
+    "per-dish": "Detail per dish",
+    "temperature": "{{temp}} °C · {{rain}} mm"
+  },
+  "alerts": {
+    "title": "Alerts",
+    "description": "Low-stock, expiration and equipment-fault notifications sent by WhatsApp and email. Critical alerts must reach both channels.",
+    "table-label": "Alerts",
+    "empty": "No alerts registered.",
+    "pending-none": "No pending alerts",
+    "pending-one": "{{count}} pending alert",
+    "pending": "{{count}} pending alerts",
+    "new": "New alert",
+    "edit": "Edit alert",
+    "create": "Create alert",
+    "created": "The alert was created.",
+    "updated": "The alert was updated.",
+    "deleted": "The alert was deleted.",
+    "delete-title": "Delete alert",
+    "delete-confirm": "Delete the alert \"{{message}}\"?",
+    "delivered-none": "Delivered",
+    "delivered-one": "Delivered (1 channel)",
+    "delivered": "Delivered ({{count}} channels)",
+    "missing-channel": "{{channel}} pending",
+    "retry": "Retry delivery",
+    "retry-on": "Retry the delivery by {{channel}} of the alert {{message}}",
+    "retried": "Delivered by {{channel}}.",
+    "acknowledge": "Mark attended",
+    "acknowledge-alert": "Mark the alert {{message}} as attended",
+    "acknowledged": "The alert was marked as attended.",
+    "attended": "Attended",
+    "columns": {
+      "type": "Type",
+      "message": "Message",
+      "severity": "Severity",
+      "delivery": "Delivery",
+      "date": "Date"
+    },
+    "fields": {
+      "type": "Type",
+      "severity": "Severity",
+      "message": "Message",
+      "channel": "Main channel"
+    },
+    "hints": {
+      "critical-channels": "Critical alerts are delivered by WhatsApp and email."
+    },
+    "placeholders": {
+      "message": "e.g. Lettuce below the minimum stock"
+    },
+    "type": {
+      "LOW_STOCK": "Low stock",
+      "EXPIRING_SOON": "Expiring soon",
+      "IOT_FAULT": "Equipment fault (IoT)",
+      "CRITICAL_STOCK": "Critical stock"
+    },
+    "severity": {
+      "INFO": "Info",
+      "WARNING": "Warning",
+      "CRITICAL": "Critical"
+    },
+    "channel": {
+      "WHATSAPP": "WhatsApp",
+      "EMAIL": "Email"
+    },
+    "errors": {
+      "not-delivered": "The alert must be delivered on every required channel before it is marked as attended."
+    }
+  },
+  "recommendations": {
+    "title": "Automatic recommendations",
+    "description": "Menu and purchase suggestions based on popularity and seasonality.",
+    "table-label": "Recommendations",
+    "empty": "No recommendations for now.",
+    "apply": "Apply",
+    "apply-item": "Apply the recommendation {{message}}",
+    "applied": "Applied",
+    "applied-toast": "The recommendation was applied.",
+    "columns": {
+      "type": "Type",
+      "recommendation": "Recommendation",
+      "impact": "Expected impact"
+    },
+    "type": {
+      "MENU_ADJUSTMENT": "Menu adjustment",
+      "PURCHASE_SUGGESTION": "Purchase suggestion"
+    }
+  },
+  "plans": {
+    "title": "Upgrade plan",
+    "description": "Compare the plans and pay or renew your subscription with Stripe or PayPal.",
+    "catalog": "Available plans",
+    "active": "Active plan: {{plan}}",
+    "current": "Your current plan",
+    "renews-on": "Your subscription renews on {{date}}.",
+    "most-popular": "Most popular",
+    "per-month": "/month",
+    "pay-with": "Pay with {{provider}}",
+    "pay-plan-with": "Pay the {{plan}} plan with {{provider}}",
+    "activated": "✓ Subscription activated: {{plan}} plan.",
+    "simulated-note": "Simulated payment: no real charges are processed.",
+    "processing": "Processing…"
+  },
+  "dashboard": {
+    "greeting": "Hello, {{name}}",
+    "team": "team",
+    "description": "Operational summary of {{restaurant}}.",
+    "your-restaurant": "your restaurant",
+    "indicators": "Key indicators",
+    "registered-items": "Registered supplies",
+    "low-critical": "Low or critical stock",
+    "expiring-soon": "Expiring in 3 days or less",
+    "inventory-value": "Inventory value",
+    "critical-items": "Critical supplies",
+    "no-critical-items": "No supplies in a critical state.",
+    "recent-alerts": "Recent alerts",
+    "no-alerts": "No alerts.",
+    "see-all-alerts": "See all alerts",
+    "projected-demand": "Projected demand (AI) for the next days",
+    "revenue-today": "Revenue today",
+    "pending-alerts": "Pending alerts",
+    "confirmed-sales": "Confirmed sales",
+    "projected-units": "Projected units (7 days)",
+    "expired": "Expired supplies",
+    "confidence": "Confidence {{value}}%"
+  },
+  "access": {
+    "denied": "Access denied",
+    "denied-detail": "Your role does not have access to this section. Ask an Administrator.",
+    "session-required": "Sign in to continue",
+    "session-required-detail": "You need an active session to open that page.",
+    "session-expired": "Your session expired"
+  },
+  "settings": {
+    "hub": {
+      "description": "Manage your account, get help, upgrade your plan or sign out.",
+      "settings-account": "Profile, restaurant, subscription and password.",
+      "settings-help": "Step-by-step guide and frequently asked questions.",
+      "settings-plans": "Compare the plans and change your subscription.",
+      "sign-out": "Close your session on this device."
+    },
+    "account": {
+      "description": "Your profile data, the restaurant data, the subscription type and your password."
+    },
+    "profile": {
+      "title": "Profile data",
+      "description": "Your name and the email you use to sign in.",
+      "saved": "Profile updated.",
+      "error": "The profile could not be saved."
+    },
+    "restaurant": {
+      "title": "Restaurant data",
+      "description": "Name, address and phone shared by the whole team.",
+      "read-only": "Only an Administrator can edit the restaurant data.",
+      "saved": "Restaurant data updated.",
+      "error": "The restaurant data could not be saved."
+    },
+    "password": {
+      "title": "Change password",
+      "description": "First confirm your current password, then type the new one twice.",
+      "current": "Current password",
+      "new": "New password",
+      "submit": "Change password",
+      "saved": "Your password was changed.",
+      "error": "The password was not changed"
+    },
+    "subscription": {
+      "title": "Subscription type",
+      "description": "The plan your restaurant is subscribed to.",
+      "plan": "Plan",
+      "price": "Price",
+      "status": "Status",
+      "renewal": "Renews on",
+      "payment": "Payment method",
+      "none": "No plan yet",
+      "statuses": {
+        "ACTIVE": "Active",
+        "PAST_DUE": "Payment pending",
+        "CANCELED": "Canceled"
+      }
+    }
+  },
+  "help": {
+    "description": "A quick guide to the StockIA flow and answers to the most common questions.",
+    "guide-title": "How StockIA works, step by step",
+    "guide-intro": "Follow these steps in order the first time. Each one ends with a link to the section.",
+    "go-to": "Go to {{section}}",
+    "steps": {
+      "inventory": {
+        "title": "Register your supplies",
+        "body": "In Inventory, create each supply with its unit, current quantity, minimum stock, shelf life and unit price. The expiration date is calculated from the shelf life.",
+        "tip": "Quantities accept up to 32 decimals, e.g. 0.125 kg."
+      },
+      "recipes": {
+        "title": "Create the recipes of your dishes",
+        "body": "In Recipes, add the supplies each dish uses and the quantity per portion. The dish price is the sum of the cost of those ingredients.",
+        "tip": "If the unit price of a supply changes, the dish price updates by itself."
+      },
+      "sell": {
+        "title": "Sell a dish",
+        "body": "Press \"Sell one\" on a recipe. StockIA checks the stock first and discounts the supplies only if every ingredient is available and not expired.",
+        "tip": "If a supply is missing or expired, the sale is not registered and a message explains why."
+      },
+      "sales": {
+        "title": "Review the sales history",
+        "body": "Sales history lists every confirmed sale, newest first. A sale can be voided, but the supplies used are not returned to stock.",
+        "tip": "The history is the data the demand forecast learns from."
+      },
+      "alerts": {
+        "title": "Attend the alerts",
+        "body": "Alerts warn you about low stock, critical stock and supplies about to expire, by WhatsApp and email.",
+        "tip": "A critical alert must reach both channels before it can be marked as attended."
+      },
+      "forecast": {
+        "title": "Check the demand forecast",
+        "body": "Demand forecast projects the dishes you will sell in the next days, so you can buy on time.",
+        "tip": "Generate a new forecast after registering several sales."
+      },
+      "recommendations": {
+        "title": "Apply the recommendations",
+        "body": "Recommendations suggest purchases and menu adjustments based on the forecast and the alerts.",
+        "tip": "Only the Administrator sees and applies recommendations."
+      },
+      "team": {
+        "title": "Invite your team",
+        "body": "In Roles & permissions, invite members as Administrators or Employees and change their role when needed.",
+        "tip": "The team always keeps at least one Administrator."
+      },
+      "settings": {
+        "title": "Adjust your account",
+        "body": "In Settings › Account settings, edit your profile and restaurant data and change your password.",
+        "tip": "To change the password you must type the current one first."
+      }
+    },
+    "roles-title": "What each role can do",
+    "roles-feature": "Feature",
+    "roles-rows": {
+      "operation": "Dashboard, inventory, recipes, sales, forecast, alerts and help",
+      "recommendations": "Recommendations",
+      "team": "Roles & permissions",
+      "subscription": "Subscription type and Upgrade plan"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "faq-title": "Frequently asked questions",
+    "faq-search": "Search questions",
+    "faq-results-none": "No questions found",
+    "faq-results-one": "1 question found",
+    "faq-results": "{{count}} questions found",
+    "faq-empty": "No questions match your search.",
+    "faq": {
+      "no-stock": {
+        "q": "Why was my sale not registered?",
+        "a": "Because a supply of the recipe is missing or does not reach the required quantity. StockIA never sells without stock: the sale is not saved in the history and the stock does not change."
+      },
+      "expired": {
+        "q": "Can I sell a dish whose supply is expired?",
+        "a": "No. Expired lots are never used. If the only stock of a supply is expired, the sale is rejected and the message tells you which supply expired."
+      },
+      "freshest": {
+        "q": "What happens if I have two lots of the same supply?",
+        "a": "Register each lot as a supply with the same name and unit. When you sell, StockIA skips the expired lots and uses the freshest one first; the inventory marks it as \"Used first in sales\"."
+      },
+      "dish-price": {
+        "q": "How is the price of a dish calculated?",
+        "a": "It is the sum of each ingredient's quantity per portion multiplied by its unit price in the inventory. The sale is registered with that price."
+      },
+      "decimals": {
+        "q": "How many decimals can a quantity have?",
+        "a": "Up to 32 decimals, both in the inventory and in the recipes. You can use a dot or a comma as decimal separator."
+      },
+      "void": {
+        "q": "If I void a sale, does the stock come back?",
+        "a": "No. A voided sale stays in the history as voided, and the supplies already used are not returned."
+      },
+      "critical-alert": {
+        "q": "Why can't I mark a critical alert as attended?",
+        "a": "Critical alerts must be delivered by WhatsApp and by email first. Retry the missing channel and then mark it as attended."
+      },
+      "roles": {
+        "q": "What can an Employee not see?",
+        "a": "Employees cannot open Roles & permissions, Recommendations, the subscription type or Upgrade plan. Everything else is available."
+      },
+      "password": {
+        "q": "How do I change my password?",
+        "a": "Go to Settings › Account settings › Change password, type your current password and then the new one twice."
+      },
+      "language": {
+        "q": "How do I switch the language?",
+        "a": "Use the EN / ES buttons in the header. StockIA always opens in English."
+      }
+    }
+  },
+  "savings": {
+    "title": "Weekly savings",
+    "period": "{{from}} to {{to}}",
+    "estimated": "Estimated savings",
+    "estimated-note": "Rescued stock plus less waste than last week",
+    "rescued": "Stock rescued",
+    "rescued-note": "Used by sales in its last 3 days before expiring",
+    "waste": "Waste of the week",
+    "waste-down": "{{amount}} less than last week",
+    "waste-up": "{{amount}} more than last week",
+    "waste-same": "Same as last week",
+    "sales": "Sales of the week",
+    "portions-one": "{{count}} portion sold",
+    "portions": "{{count}} portions sold",
+    "top-rescued": "Most rescued supplies",
+    "wasted": "Expired with stock",
+    "none-rescued": "No stock was rescued this week.",
+    "none-wasted": "Nothing expired with stock this week."
+  },
+  "not-found": {
+    "title": "Page not found",
+    "description": "The page {{path}} does not exist or was moved.",
+    "back": "Go to the dashboard"
+  },
+  "terms": {
+    "title": "Terms of service",
+    "updated": "Last updated: November 2026",
+    "intro": "These terms explain how DataBit provides StockIA to restaurants. By creating an account you accept them.",
+    "sections": {
+      "service": {
+        "title": "The service",
+        "body": "StockIA helps restaurants manage supply lots, recipes, sales, alerts and demand forecasts. Forecasts and recommendations are estimates and do not replace the judgment of the restaurant."
+      },
+      "accounts": {
+        "title": "Accounts and roles",
+        "body": "The owner of the restaurant is its first Administrator and is responsible for the team members invited. Keep your password private; after 5 wrong passwords the account is locked for 15 minutes."
+      },
+      "data": {
+        "title": "Data and privacy",
+        "body": "The data of each restaurant is only visible to its team. We use it to run the service and to train the demand model with aggregated, anonymous sales; we do not sell it."
+      },
+      "payments": {
+        "title": "Plans and payments",
+        "body": "The Esencial plan is free. Paid plans renew every 30 days. In this academic version payments with Stripe and PayPal are simulated and no real charges are made."
+      },
+      "predictions": {
+        "title": "Forecasts and automated decisions",
+        "body": "Demand forecasts come from a machine learning model trained with the restaurant's own sales, the Peruvian calendar and the weather. They are estimates with a stated confidence level: StockIA shows them as suggestions and never buys, discards or changes stock without a person's action, except the deduction of a sale the team registers."
+      },
+      "ethics": {
+        "title": "Professional and ethical responsibility",
+        "body": "DataBit develops StockIA following the Software Engineering Code of Ethics and Professional Practice (ACM/IEEE) and the Code of Ethics of the Colegio de Ingenieros del Perú (CIP): we act in the public interest and in the interest of our clients, we are honest about the limits of the product (for example, which features are simulated in this version), we protect the confidentiality of the data entrusted to us and we report and fix the defects we find."
+      },
+      "availability": {
+        "title": "Availability and changes",
+        "body": "We work to keep the service available, but it may be interrupted for maintenance or failures. If these terms change, we will publish the new version on this page with its date before it applies."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Write to soporte@databitecorp.com for questions about these terms."
+      }
+    }
+  }
+}
