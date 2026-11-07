@@ -1,0 +1,40 @@
+<section class="page">
+  <header class="page-header">
+    <div><h1>{{ 'forecast.title' | translate }}</h1><p>{{ 'forecast.description' | translate }}</p></div>
+    <button mat-flat-button type="button" (click)="generate()" [disabled]="store.generating()">
+      <mat-icon>auto_awesome</mat-icon>{{ (store.generating() ? 'forecast.generating' : 'forecast.generate') | translate }}
+    </button>
+  </header>
+  @if (store.loadingForecast() || store.generating()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
+  @if (store.forecast(); as forecast) {
+    <div class="summary" role="group" [attr.aria-label]="'forecast.summary' | translate">
+      <mat-card appearance="outlined"><mat-card-content><span class="muted">{{ 'forecast.confidence' | translate }}</span>
+        <p class="value">{{ forecast.confidencePercent }}%</p></mat-card-content></mat-card>
+      <mat-card appearance="outlined"><mat-card-content><span class="muted">{{ 'forecast.method-label' | translate }}</span>
+        <p class="value">{{ forecast.method === 'MACHINE_LEARNING' ? ('forecast.method.ml' | translate: {version: forecast.modelVersion}) : ('forecast.method.baseline' | translate) }}</p>
+      </mat-card-content></mat-card>
+      <mat-card appearance="outlined"><mat-card-content><span class="muted">{{ 'forecast.weather-label' | translate }}</span>
+        <p class="value">{{ weatherKey() | translate }}</p>
+        <span class="muted">{{ 'forecast.weather-source.' + forecast.weatherSource | translate }}</span></mat-card-content></mat-card>
+      <mat-card appearance="outlined"><mat-card-content><span class="muted">{{ 'forecast.generated-at' | translate }}</span>
+        <p class="value">{{ forecast.generatedAt | localDate: true }}</p></mat-card-content></mat-card>
+    </div>
+    <h2>{{ 'forecast.units-per-day' | translate }}</h2>
+    <app-forecast-chart [forecast]="forecast"/>
+    <mat-accordion>
+      @for (day of forecast.days; track day.date) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ day.date | localDate }} · {{ day.projectedUnits }} {{ 'forecast.units' | translate }}</mat-panel-title>
+            <mat-panel-description>{{ 'forecast.temperature' | translate: {temp: day.tempMaxC, rain: day.precipitationMm} }}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <dl class="dishes" [attr.aria-label]="'forecast.per-dish' | translate">
+            @for (dish of day.dishes; track dish.dishName) { <dt>{{ dish.dishName }}</dt><dd>{{ dish.projectedUnits }}</dd> }
+          </dl>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+  } @else if (!store.loadingForecast()) {
+    <p class="empty-state">{{ 'forecast.empty' | translate }}</p>
+  }
+</section>
