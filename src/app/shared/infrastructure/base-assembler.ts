@@ -1,5 +1,5 @@
 import {BaseResource, BaseResponse} from './base-response';
-import {BaseEntity} from './base-entity';
+import {BaseEntity} from '../domain/model/base-entity';
 
 /** Defines conversions between domain entities and API representations. */
 export interface BaseAssembler<TEntity extends BaseEntity, TResource extends BaseResource, TResponse extends BaseResponse> {
