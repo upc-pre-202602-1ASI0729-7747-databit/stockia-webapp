@@ -21,11 +21,13 @@ export class AnalyticsDashboardApi extends BaseApi {
   private readonly savingsAssembler = new WeeklySavingsAssembler();
 
   getSummary(): Observable<DashboardSummary> {
-    return this.http.get<DashboardSummary>(`${this.endpointUrl}/summary`).pipe(catchError(error => throwError(() => ApiError.from(error))));
+    return this.http.get<DashboardSummary>(`${this.endpointUrl}/summary`)
+      .pipe(catchError(error => throwError(() => ApiError.from(error))));
   }
 
   getWeeklySavings(): Observable<WeeklySavings> {
     return this.http.get<WeeklySavingsResource>(`${this.endpointUrl}/weekly-savings`).pipe(
-      map(resource => this.savingsAssembler.toEntityFromResource(resource)), catchError(error => throwError(() => ApiError.from(error))));
+      map(resource => this.savingsAssembler.toEntityFromResource(resource)),
+      catchError(error => throwError(() => ApiError.from(error))));
   }
 }
