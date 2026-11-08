@@ -1,0 +1,50 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1>{{ 'dashboard.greeting' | translate: {name: iamStore.currentUser()?.fullName ?? ('dashboard.team' | translate)} }}</h1>
+      <p>{{ 'dashboard.description' | translate: {restaurant: iamStore.currentUser()?.restaurantName || ('dashboard.your-restaurant' | translate)} }}</p>
+    </div>
+  </header>
+  @if (store.loading()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
+  @if (store.summary(); as summary) {
+    <div class="kpis" role="group" [attr.aria-label]="'dashboard.indicators' | translate">
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">inventory_2</mat-icon>
+        <span class="muted">{{ 'dashboard.registered-items' | translate }}</span><strong>{{ summary.registeredSupplies }}</strong></mat-card-content></mat-card>
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">warning</mat-icon>
+        <span class="muted">{{ 'dashboard.low-critical' | translate }}</span><strong>{{ summary.lowOrCriticalSupplies }}</strong></mat-card-content></mat-card>
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">schedule</mat-icon>
+        <span class="muted">{{ 'dashboard.expiring-soon' | translate }}</span><strong>{{ summary.expiringSoonSupplies }}</strong></mat-card-content></mat-card>
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">payments</mat-icon>
+        <span class="muted">{{ 'dashboard.inventory-value' | translate }}</span><strong>{{ summary.inventoryValue | money }}</strong></mat-card-content></mat-card>
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">point_of_sale</mat-icon>
+        <span class="muted">{{ 'dashboard.revenue-today' | translate }}</span><strong>{{ summary.revenueToday | money }}</strong></mat-card-content></mat-card>
+      <mat-card appearance="outlined" class="kpi"><mat-card-content><mat-icon aria-hidden="true">notifications</mat-icon>
+        <span class="muted">{{ 'dashboard.pending-alerts' | translate }}</span><strong>{{ summary.pendingAlerts }}</strong></mat-card-content></mat-card>
+    </div>
+  }
+  @if (iamStore.isAdmin() && store.savings(); as savings) { <app-weekly-savings-card [savings]="savings"/> }
+  <div class="panels">
+    <mat-card appearance="outlined">
+      <mat-card-header><mat-card-title>{{ 'dashboard.critical-items' | translate }}</mat-card-title></mat-card-header>
+      <mat-card-content>
+        @if (stockStore.itemsNeedingAttention().length) {
+          <ul>@for (item of stockStore.itemsNeedingAttention(); track item.id) {
+            <li><span>{{ item.name }} · {{ item.quantity | quantity: item.unit }}</span><app-stock-status-tag [status]="item.status"/></li> }</ul>
+        } @else { <p class="muted">{{ 'dashboard.no-critical-items' | translate }}</p> }
+      </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header><mat-card-title>{{ 'dashboard.recent-alerts' | translate }}</mat-card-title></mat-card-header>
+      <mat-card-content>
+        @if (alertsStore.recentAlerts().length) {
+          <ul>@for (alert of alertsStore.recentAlerts(); track alert.id) { <li><span>{{ alert.message }}</span><app-alert-severity-tag [severity]="alert.severity"/></li> }</ul>
+        } @else { <p class="muted">{{ 'dashboard.no-alerts' | translate }}</p> }
+      </mat-card-content>
+      <mat-card-actions><a mat-button routerLink="/app/alerts">{{ 'dashboard.see-all-alerts' | translate }}</a></mat-card-actions>
+    </mat-card>
+  </div>
+  @if (mlStore.forecast(); as forecast) {
+    <h2>{{ 'dashboard.projected-demand' | translate }}</h2>
+    <app-forecast-chart [forecast]="forecast"/>
+  }
+</section>

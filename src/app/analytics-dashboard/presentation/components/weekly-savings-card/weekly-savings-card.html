@@ -1,0 +1,41 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ 'savings.title' | translate }}</mat-card-title>
+    <mat-card-subtitle>{{ 'savings.period' | translate: {from: (savings().from | localDate), to: (savings().to | localDate)} }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="figures">
+      <div class="figure main"><span class="muted">{{ 'savings.estimated' | translate }}</span><strong>{{ savings().estimatedSavings | money }}</strong>
+        <span class="muted">{{ 'savings.estimated-note' | translate }}</span></div>
+      <div class="figure"><span class="muted">{{ 'savings.rescued' | translate }}</span><strong>{{ savings().rescuedValue | money }}</strong>
+        <span class="muted">{{ 'savings.rescued-note' | translate }}</span></div>
+      <div class="figure"><span class="muted">{{ 'savings.waste' | translate }}</span><strong>{{ savings().wasteValue | money }}</strong>
+        <span class="muted">
+          @switch (savings().wasteTrend) {
+            @case ('down') { {{ 'savings.waste-down' | translate: {amount: (savings().wasteReduction | money)} }} }
+            @case ('up') { {{ 'savings.waste-up' | translate: {amount: (savings().wasteIncrease | money)} }} }
+            @default { {{ 'savings.waste-same' | translate }} }
+          }
+        </span></div>
+      <div class="figure"><span class="muted">{{ 'savings.sales' | translate }}</span><strong>{{ savings().revenue | money }}</strong>
+        <span class="muted">
+          @if (savings().portionsSold === 1) { {{ 'savings.portions-one' | translate: {count: 1} }} }
+          @else { {{ 'savings.portions' | translate: {count: savings().portionsSold} }} }
+        </span></div>
+    </div>
+    <div class="lists">
+      <section>
+        <h3>{{ 'savings.top-rescued' | translate }}</h3>
+        @if (savings().topRescued.length) {
+          <ul>@for (line of savings().topRescued; track line.itemName) { <li>{{ line.itemName }}: {{ line.quantity | quantity: line.unit }} · {{ line.value | money }}</li> }</ul>
+        } @else { <p class="muted">{{ 'savings.none-rescued' | translate }}</p> }
+      </section>
+      <section>
+        <h3>{{ 'savings.wasted' | translate }}</h3>
+        @if (savings().wasted.length) {
+          <ul>@for (line of savings().wasted; track line.itemName) { <li>{{ line.itemName }}: {{ line.quantity | quantity: line.unit }} · {{ line.value | money }}</li> }</ul>
+        } @else { <p class="muted">{{ 'savings.none-wasted' | translate }}</p> }
+      </section>
+    </div>
+  </mat-card-content>
+</mat-card>
