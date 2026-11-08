@@ -1,0 +1,55 @@
+<a class="skip-link" href="#main-content">{{ 'app.skip-to-content' | translate }}</a>
+<mat-toolbar class="toolbar" role="banner">
+  <button mat-icon-button type="button" (click)="toggleMenu()" [attr.aria-expanded]="menuOpened()"
+          [attr.aria-label]="(menuOpened() ? 'layout.close-menu' : 'layout.open-menu') | translate">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="brand" routerLink="/app/dashboard" [attr.aria-label]="'layout.go-home' | translate">
+    <img src="/favicon.svg" alt="" width="28" height="28">
+    <span>StockIA</span>
+  </a>
+  <span class="environment-tag">{{ 'layout.environment-tag' | translate }}</span>
+  <span class="spacer"></span>
+  <app-language-switcher/>
+  @if (iamStore.currentUser(); as user) {
+    <button mat-button type="button" class="user-button" [matMenuTriggerFor]="userMenu"
+            [attr.aria-label]="'layout.open-settings' | translate: {name: user.fullName}">
+      <span class="avatar" aria-hidden="true">{{ user.initials }}</span>
+      <span class="user-text">
+        <span class="user-name">{{ user.fullName }}</span>
+        <span class="user-role">{{ 'iam.roles.' + user.role | translate }} · {{ user.restaurantName }}</span>
+      </span>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <a mat-menu-item routerLink="/app/settings/account"><mat-icon>person</mat-icon>{{ 'nav.settings-account' | translate }}</a>
+      <a mat-menu-item routerLink="/app/settings/help"><mat-icon>help</mat-icon>{{ 'nav.settings-help' | translate }}</a>
+      @if (iamStore.isAdmin()) {
+        <a mat-menu-item routerLink="/app/settings/plans"><mat-icon>workspace_premium</mat-icon>{{ 'nav.settings-plans' | translate }}</a>
+      }
+      <button mat-menu-item type="button" (click)="signOut()"><mat-icon>logout</mat-icon>{{ 'nav.sign-out' | translate }}</button>
+    </mat-menu>
+  }
+</mat-toolbar>
+
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav class="sidenav" [mode]="isHandset() ? 'over' : 'side'" [opened]="menuOpened()" (closedStart)="menuOpened.set(false)"
+               [attr.aria-label]="'layout.sidebar' | translate">
+    <nav [attr.aria-label]="'layout.main-navigation' | translate">
+      <mat-nav-list>
+        @for (option of visibleOptions(); track option.link) {
+          <a mat-list-item [routerLink]="option.link" routerLinkActive="active" #link="routerLinkActive"
+             [attr.aria-current]="link.isActive ? 'page' : null" (click)="closeOnHandset()">
+            <mat-icon matListItemIcon aria-hidden="true">{{ option.icon }}</mat-icon>
+            <span matListItemTitle>{{ option.label | translate }}</span>
+          </a>
+        }
+      </mat-nav-list>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="content-shell">
+    <main id="main-content" class="page-content" tabindex="-1">
+      <router-outlet/>
+    </main>
+    <app-footer-content/>
+  </mat-sidenav-content>
+</mat-sidenav-container>

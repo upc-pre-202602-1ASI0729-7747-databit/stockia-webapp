@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  gap: 8px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.environment-tag {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-button {
+  color: white;
+  height: auto;
+  padding: 4px 8px;
+}
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #b84a1a;
+  color: white;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.user-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.user-name {
+  font-weight: 500;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.layout-container {
+  flex: 1;
+}
+
+.sidenav {
+  width: 240px;
+  border-right: none;
+}
+
+.sidenav a {
+  color: rgba(255, 255, 255, 0.9);
+  --mat-list-list-item-label-text-color: rgba(255, 255, 255, 0.9);
+  --mat-list-list-item-leading-icon-color: rgba(255, 255, 255, 0.85);
+}
+
+.sidenav a.active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.content-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.page-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1280px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  outline: none;
+}
+
+@media (max-width: 899px) {
+  .environment-tag, .user-text {
+    display: none;
+  }
+
+  .page-content {
+    padding: 16px;
+  }
+}
