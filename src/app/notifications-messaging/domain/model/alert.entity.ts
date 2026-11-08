@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../shared/domain/model/base-entity';
+import { BaseEntity } from '../../../shared/domain/model/base-entity';
 
 export type AlertType = 'LOW_STOCK' | 'CRITICAL_STOCK' | 'EXPIRING_SOON' | 'IOT_FAULT';
 export type AlertSeverity = 'INFO' | 'WARNING' | 'CRITICAL';
