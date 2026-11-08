@@ -1,4 +1,4 @@
-export interface DashboardSummaryEntity {
+export interface DashboardSummary {
   registeredSupplies: number;
   lowOrCriticalSupplies: number;
   expiredSupplies: number;
