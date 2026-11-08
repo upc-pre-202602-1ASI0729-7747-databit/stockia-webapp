@@ -1,0 +1,73 @@
+<section class="page">
+  <header class="page-header">
+    <div><h1>{{ 'alerts.title' | translate }}</h1><p>{{ 'alerts.description' | translate }}</p>
+      <p role="status">
+        @switch (store.pendingAlerts().length) {
+          @case (0) { {{ 'alerts.pending-none' | translate }} }
+          @case (1) { {{ 'alerts.pending-one' | translate: {count: 1} }} }
+          @default { {{ 'alerts.pending' | translate: {count: store.pendingAlerts().length} }} }
+        }
+      </p>
+    </div>
+    <button mat-flat-button type="button" (click)="openForm()"><mat-icon>add_alert</mat-icon>{{ 'alerts.new' | translate }}</button>
+  </header>
+  @if (store.loading()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="store.alerts()" [attr.aria-label]="'alerts.table-label' | translate">
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>{{ 'alerts.columns.type' | translate }}</th>
+        <td mat-cell *matCellDef="let alert">{{ 'alerts.type.' + alert.type | translate }}</td>
+      </ng-container>
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef>{{ 'alerts.columns.message' | translate }}</th>
+        <td mat-cell *matCellDef="let alert" class="message">{{ alert.message }}</td>
+      </ng-container>
+      <ng-container matColumnDef="severity">
+        <th mat-header-cell *matHeaderCellDef>{{ 'alerts.columns.severity' | translate }}</th>
+        <td mat-cell *matCellDef="let alert"><app-alert-severity-tag [severity]="alert.severity"/></td>
+      </ng-container>
+      <ng-container matColumnDef="delivery">
+        <th mat-header-cell *matHeaderCellDef>{{ 'alerts.columns.delivery' | translate }}</th>
+        <td mat-cell *matCellDef="let alert">
+          <span class="delivery">
+            @if (alert.delivered) {
+              <span class="tag tag-success">
+                @if (alert.deliveredChannels.length === 1) { {{ 'alerts.delivered-one' | translate }} }
+                @else { {{ 'alerts.delivered' | translate: {count: alert.deliveredChannels.length} }} }
+              </span>
+            } @else if (alert.pendingChannel) {
+              <span class="tag tag-warning">{{ 'alerts.missing-channel' | translate: {channel: channelName(alert.pendingChannel)} }}</span>
+            }
+            @if (alert.acknowledged) { <span class="tag tag-neutral">{{ 'alerts.attended' | translate }}</span> }
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>{{ 'alerts.columns.date' | translate }}</th>
+        <td mat-cell *matCellDef="let alert">{{ alert.createdAt | localDate: true }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef><span class="visually-hidden">{{ 'common.actions' | translate }}</span></th>
+        <td mat-cell *matCellDef="let alert">
+          @if (alert.pendingChannel) {
+            <button mat-icon-button type="button" (click)="retry(alert)" [matTooltip]="'alerts.retry' | translate"
+                    [attr.aria-label]="'alerts.retry-on' | translate: {channel: channelName(alert.pendingChannel), message: alert.message}"><mat-icon>send</mat-icon></button>
+          }
+          @if (!alert.acknowledged) {
+            <button mat-icon-button type="button" (click)="acknowledge(alert)" [matTooltip]="'alerts.acknowledge' | translate"
+                    [attr.aria-label]="'alerts.acknowledge-alert' | translate: {message: alert.message}"><mat-icon>task_alt</mat-icon></button>
+          }
+          @if (!alert.isAutomatic) {
+            <button mat-icon-button type="button" (click)="openForm(alert)" [matTooltip]="'common.edit' | translate"
+                    [attr.aria-label]="'common.edit-item' | translate: {name: alert.message}"><mat-icon>edit</mat-icon></button>
+          }
+          <button mat-icon-button type="button" (click)="remove(alert)" [matTooltip]="'common.delete' | translate"
+                  [attr.aria-label]="'common.delete-item' | translate: {name: alert.message}"><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns" [class.attended]="row.acknowledged"></tr>
+    </table>
+    @if (!store.loading() && store.alerts().length === 0) { <p class="empty-state">{{ 'alerts.empty' | translate }}</p> }
+  </div>
+</section>
