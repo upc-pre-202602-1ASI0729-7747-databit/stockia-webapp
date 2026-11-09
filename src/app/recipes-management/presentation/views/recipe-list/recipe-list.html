@@ -1,0 +1,36 @@
+<section class="page">
+  <header class="page-header">
+    <div><h1>{{ 'recipes.title' | translate }}</h1><p>{{ 'recipes.description' | translate }}</p></div>
+    <button mat-flat-button type="button" (click)="openForm()"><mat-icon>add</mat-icon>{{ 'recipes.new' | translate }}</button>
+  </header>
+  @if (store.loadingRecipes()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
+  <div class="recipes" role="list" [attr.aria-label]="'recipes.table-label' | translate">
+    @for (recipe of store.recipes(); track recipe.id) {
+      <mat-card appearance="outlined" role="listitem" [class.sold]="justSold() === recipe.id">
+        <mat-card-content>
+          <div class="head">
+            <h3>{{ recipe.dishName }}</h3>
+            <span [class]="'tag ' + availabilityCss(recipe)">{{ availabilityKey(recipe) | translate }}</span>
+          </div>
+          <ul [attr.aria-label]="'recipes.ingredients-of' | translate: {name: recipe.dishName}">
+            @for (line of recipe.ingredients; track line.inventoryItemId) {
+              <li>{{ line.inventoryItemName }} · {{ line.quantityRequired | quantity: line.unit }}</li>
+            }
+          </ul>
+          <p class="price">{{ recipe.price | money }}</p>
+          <span class="muted">{{ 'recipes.dish-price' | translate }}</span>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button type="button" (click)="sell(recipe)" [disabled]="selling() === recipe.id"
+                  [attr.aria-label]="'recipes.sell-dish' | translate: {name: recipe.dishName}">
+            <mat-icon>point_of_sale</mat-icon>{{ 'recipes.sell' | translate }}</button>
+          <button mat-icon-button type="button" (click)="openForm(recipe)" [attr.aria-label]="'common.edit-item' | translate: {name: recipe.dishName}"
+                  [matTooltip]="'common.edit' | translate"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button type="button" (click)="remove(recipe)" [attr.aria-label]="'common.delete-item' | translate: {name: recipe.dishName}"
+                  [matTooltip]="'common.delete' | translate"><mat-icon>delete</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+  @if (!store.loadingRecipes() && store.recipes().length === 0) { <p class="empty-state">{{ 'recipes.empty' | translate }}</p> }
+</section>
