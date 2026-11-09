@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>{{ (item ? 'inventory.edit' : 'inventory.new') | translate }}</h2>
+<form [formGroup]="form" (ngSubmit)="save()" novalidate>
+  <mat-dialog-content>
+    <p class="muted">{{ 'fields.required-legend' | translate }}</p>
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.name' | translate }}</mat-label>
+        <input matInput formControlName="name" required [placeholder]="'inventory.placeholders.name' | translate">
+        <mat-error>{{ form.controls.name | errorMessage }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.unit' | translate }}</mat-label>
+        <input matInput formControlName="unit" required [placeholder]="'inventory.placeholders.unit' | translate">
+        <mat-error>{{ form.controls.unit | errorMessage }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.storage' | translate }}</mat-label>
+        <mat-select formControlName="storageType">
+          @for (type of storageTypes; track type) { <mat-option [value]="type">{{ 'inventory.storage.' + type | translate }}</mat-option> }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.quantity' | translate }}</mat-label>
+        <input matInput formControlName="quantity" inputmode="decimal" required>
+        <mat-hint>{{ 'inventory.hints.decimals' | translate: {max: maxDecimals} }}</mat-hint>
+        <mat-error>{{ form.controls.quantity | errorMessage }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.min-threshold' | translate }}</mat-label>
+        <input matInput formControlName="minThreshold" inputmode="decimal" required>
+        <mat-hint>{{ 'inventory.hints.min-threshold' | translate }}</mat-hint>
+        <mat-error>{{ form.controls.minThreshold | errorMessage }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.shelf-life' | translate }}</mat-label>
+        <input matInput type="number" min="1" formControlName="shelfLifeDays" required>
+        <mat-hint>{{ 'inventory.hints.shelf-life' | translate }}</mat-hint>
+        <mat-error>{{ form.controls.shelfLifeDays | errorMessage }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'inventory.fields.unit-cost' | translate }}</mat-label>
+        <input matInput type="number" min="0" step="0.01" formControlName="unitCost" required>
+        <mat-hint>{{ 'inventory.hints.unit-cost' | translate }}</mat-hint>
+        <mat-error>{{ form.controls.unitCost | errorMessage }}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>{{ 'common.cancel' | translate }}</button>
+    <button mat-flat-button type="submit" [disabled]="saving()">{{ (saving() ? 'common.saving' : 'common.save') | translate }}</button>
+  </mat-dialog-actions>
+</form>
