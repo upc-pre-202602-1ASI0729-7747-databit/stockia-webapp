@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>{{ (recipe ? 'recipes.edit' : 'recipes.new') | translate }}</h2>
+<form [formGroup]="form" (ngSubmit)="save()" novalidate>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>{{ 'recipes.fields.dish-name' | translate }}</mat-label>
+      <input matInput formControlName="dishName" required [placeholder]="'recipes.placeholders.dish-name' | translate">
+      <mat-error>{{ form.controls.dishName | errorMessage }}</mat-error>
+    </mat-form-field>
+    <h3>{{ 'recipes.columns.ingredients' | translate }}</h3>
+    <div formArrayName="ingredients">
+      @for (line of lines.controls; track line; let index = $index) {
+        <div class="line" [formGroupName]="index">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'recipes.fields.supply' | translate }}</mat-label>
+            <mat-select formControlName="inventoryItemId" [placeholder]="'recipes.placeholders.supply' | translate">
+              @for (supply of supplies(); track supply.id) {
+                <mat-option [value]="supply.id">{{ supply.name }} ({{ supply.unit }}) · {{ 'inventory.status.' + supply.status | translate }}</mat-option>
+              }
+            </mat-select>
+            @if (line.get('inventoryItemId')?.invalid) { <mat-error>{{ 'recipes.errors.line' | translate }}</mat-error> }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'recipes.fields.required-quantity' | translate }}</mat-label>
+            <input matInput formControlName="quantityRequired" inputmode="decimal" required>
+            <span matTextSuffix>{{ unitOf(line.get('inventoryItemId')?.value) }}</span>
+            <mat-error>{{ line.get('quantityRequired') | errorMessage }}</mat-error>
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeLine(index)"
+                  [attr.aria-label]="'recipes.remove-line' | translate: {name: unitOf(line.get('inventoryItemId')?.value)}"><mat-icon>close</mat-icon></button>
+        </div>
+      }
+    </div>
+    <button mat-stroked-button type="button" (click)="addLine()"><mat-icon>add</mat-icon>{{ 'recipes.add-ingredient' | translate }}</button>
+    <p class="muted">{{ 'recipes.price-note' | translate }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>{{ 'common.cancel' | translate }}</button>
+    <button mat-flat-button type="submit" [disabled]="saving()">{{ 'recipes.save' | translate }}</button>
+  </mat-dialog-actions>
+</form>
