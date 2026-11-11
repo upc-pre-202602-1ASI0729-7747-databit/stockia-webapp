@@ -1,0 +1,12 @@
+h2 { margin: 0; font-size: 1.6rem; color: #14301f; }
+form { display: flex; flex-direction: column; margin-top: 16px; }
+.row { display: flex; justify-content: flex-end; margin: -4px 0 12px; }
+.submit { height: 44px; }
+.submit mat-spinner { display: inline-block; vertical-align: middle; margin-right: 8px; }
+.switch { text-align: center; margin-top: 16px; }
+.banner { display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 8px; margin-top: 12px; }
+.banner-error { background: #fbeae8; color: #b03224; }
+.banner-warning { background: #fbf3df; color: #8a6508; }
+.demo { margin-top: 16px; padding: 12px; border-radius: 8px; background: #eef4f0; display: flex; flex-wrap: wrap; gap: 8px; }
+.demo p { width: 100%; margin: 0; font-size: 0.85rem; color: #55635c; }
+a { color: #1f4631; font-weight: 500; }
