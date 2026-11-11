@@ -1,0 +1,38 @@
+<section class="page">
+  <header class="page-header"><div><h1>{{ 'plans.title' | translate }}</h1><p>{{ 'plans.description' | translate }}</p></div></header>
+  @if (store.currentPlan(); as current) {
+    <p role="status"><strong>{{ 'plans.active' | translate: {plan: current.name} }}</strong>
+      @if (store.subscription(); as subscription) { · {{ 'plans.renews-on' | translate: {date: (subscription.renewalDate | localDate)} }} }</p>
+  }
+  <h2 class="visually-hidden">{{ 'plans.catalog' | translate }}</h2>
+  <div class="plans">
+    @for (plan of store.plans(); track plan.id) {
+      <mat-card appearance="outlined" class="plan" [class.highlighted]="plan.highlighted">
+        <mat-card-content>
+          @if (plan.highlighted) { <span class="tag tag-warning badge">{{ 'plans.most-popular' | translate }}</span> }
+          <h3>{{ plan.name }}</h3>
+          <p class="price">{{ plan.monthlyPrice | money }} <small>{{ 'plans.per-month' | translate }}</small></p>
+          <ul>
+            @for (feature of plan.features; track feature) { <li><mat-icon aria-hidden="true">check</mat-icon>{{ feature }}</li> }
+          </ul>
+          @if (isCurrent(plan)) {
+            <span class="tag tag-success">{{ 'plans.current' | translate }}</span>
+          } @else if (plan.isFree) {
+            <button mat-stroked-button type="button" [disabled]="store.paying()" (click)="choose(plan, 'NONE')">{{ plan.name }}</button>
+          } @else {
+            <div class="pay">
+              @for (provider of providers; track provider.method) {
+                <button mat-flat-button type="button" [disabled]="store.paying()" (click)="choose(plan, provider.method)"
+                        [attr.aria-label]="'plans.pay-plan-with' | translate: {plan: plan.name, provider: provider.label}">
+                  @if (processing() === plan.id + '-' + provider.method) { {{ 'plans.processing' | translate }} }
+                  @else { {{ 'plans.pay-with' | translate: {provider: provider.label} }} }
+                </button>
+              }
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+  <p class="muted">{{ 'plans.simulated-note' | translate }}</p>
+</section>
