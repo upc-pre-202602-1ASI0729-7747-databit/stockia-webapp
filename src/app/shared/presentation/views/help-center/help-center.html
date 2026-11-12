@@ -1,0 +1,56 @@
+<section class="page">
+  <header class="page-header"><div><h1>{{ 'nav.settings-help' | translate }}</h1><p>{{ 'help.description' | translate }}</p></div></header>
+
+  <h2>{{ 'help.guide-title' | translate }}</h2>
+  <p class="muted">{{ 'help.guide-intro' | translate }}</p>
+  <ol class="steps">
+    @for (step of steps; track step) {
+      <li class="step">
+        <mat-card appearance="outlined">
+          <mat-card-content>
+            <h3>{{ 'help.steps.' + step + '.title' | translate }}</h3>
+            <p>{{ 'help.steps.' + step + '.body' | translate }}</p>
+            <p class="tip">{{ 'help.steps.' + step + '.tip' | translate }}</p>
+            <a [routerLink]="stepLinks[step]">{{ 'help.go-to' | translate: {section: ('help.steps.' + step + '.title' | translate)} }}</a>
+          </mat-card-content>
+        </mat-card>
+      </li>
+    }
+  </ol>
+
+  <h2>{{ 'help.roles-title' | translate }}</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th scope="col">{{ 'help.roles-feature' | translate }}</th><th scope="col">{{ 'iam.roles.ADMIN' | translate }}</th>
+        <th scope="col">{{ 'iam.roles.EMPLOYEE' | translate }}</th></tr></thead>
+      <tbody>
+        @for (row of roleRows; track row.key) {
+          <tr><th scope="row">{{ 'help.roles-rows.' + row.key | translate }}</th>
+            <td>{{ (row.admin ? 'help.yes' : 'help.no') | translate }}</td><td>{{ (row.employee ? 'help.yes' : 'help.no') | translate }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h2>{{ 'help.faq-title' | translate }}</h2>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ 'help.faq-search' | translate }}</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="search" [value]="search()" (input)="search.set($any($event.target).value)">
+  </mat-form-field>
+  <p class="muted" aria-live="polite">
+    @switch (faqs().length) {
+      @case (0) { {{ 'help.faq-results-none' | translate }} }
+      @case (1) { {{ 'help.faq-results-one' | translate }} }
+      @default { {{ 'help.faq-results' | translate: {count: faqs().length} }} }
+    }
+  </p>
+  <mat-accordion>
+    @for (key of faqs(); track key) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header><mat-panel-title>{{ 'help.faq.' + key + '.q' | translate }}</mat-panel-title></mat-expansion-panel-header>
+        <p>{{ 'help.faq.' + key + '.a' | translate }}</p>
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+</section>

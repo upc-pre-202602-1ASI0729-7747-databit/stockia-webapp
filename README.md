@@ -1,61 +1,67 @@
-# stockia-webapp
+# StockIA Web Application
 
-## StockiaFrontend
+Frontend of **StockIA** (DataBit, UPC — Open Source course): smart inventory, recipes, sales, alerts, demand forecast
+with Machine Learning and recommendations for restaurants. Built with **Angular 22**, **Angular Material** and
+**ngx-translate** (English `en-US` by default, Latin American Spanish `es-419`), organized by bounded context and connected to the
+**StockIA Platform** RESTful API (Spring Boot): https://github.com/upc-pre-202602-1ASI0729-7747-databit/stockia-platform-api## Structure
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.7.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+```
+src/app/
+├── shared/                    base entity/assembler/endpoint/API, ApiError, DecimalQuantity, language store,
+│                              notifications, interceptor (Accept-Language), layout, footer (Terms), pipes, validators
+├── iam/                       sign-in, password recovery, team & roles, account settings, session, guards, JWT interceptor
+├── restaurant-registration/   restaurant sign-up and restaurant data
+├── subscription-payments/     plan catalog, subscription and simulated Stripe / PayPal checkout
+├── stock-management/          supply lots (exact quantities with up to 32 decimals), stock allocation preview
+├── recipes-management/        recipes, sale of a dish (422 CannotSell explained) and sales history
+├── notifications-messaging/   automatic and manual alerts, delivery retries and acknowledgement
+├── ml-recommendations/        demand forecast (ONNX model of the API) and recommendations
+└── analytics-dashboard/       KPIs and weekly savings
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Every bounded context has the same layers:
 
-## Code scaffolding
+| Layer | Content |
+|---|---|
+| `domain/model` | Entities with private fields and getters (`*.entity.ts`), commands and value types |
+| `infrastructure` | `*-response.ts` (API resources), `*-assembler.ts` (resource ⇄ entity), `*-api-endpoint.ts` (extends `BaseApiEndpoint`) and the `*-api.ts` facade (extends `BaseApi`) |
+| `application` | `*.store.ts`: state with signals and the use cases the views call (no view uses `HttpClient`) |
+| `presentation` | `views` (routed) and `components` (embedded), Angular Material + ngx-translate |
+| `*.routes.ts` | Lazy routes of the context |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Routes
 
-```bash
-ng generate component component-name
-```
+Public: `/auth/sign-in`, `/auth/sign-up` (the landing page buttons), `/auth/forgot-password`, `/auth/reset-password`,
+`/terms`. Application (session required): `/app/dashboard`, `/app/inventory`, `/app/recipes`, `/app/sales`,
+`/app/forecast`, `/app/alerts`, `/app/recommendations` (Administrator), `/app/roles` (Administrator),
+`/app/settings`, `/app/settings/account` (`/app/profile`), `/app/settings/help`, `/app/settings/plans`
+(Administrator, `/app/plans`).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Run
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Requirements: Node.js 22.22.3+ or 24.15+, and the StockIA Platform API running on `http://localhost:8181`.
 
 ```bash
-ng test
+npm install
+npm start            # http://localhost:4200 (environment.development.ts → http://localhost:8181/api/v1)
+npm run build        # production build in dist/stockia-webapp/browser (environment.ts)
 ```
 
-## Running end-to-end tests
+Demo accounts (password `stockia123`): `admin@databitecorp.com` (Administrator) and `empleado@databitecorp.com`
+(Employee).
 
-For end-to-end (e2e) testing, run:
+The production API URL is `platformProviderApiBaseUrl` in `src/environments/environment.ts`; change it to the URL of
+your deployment of the API before deploying to Vercel (`vercel.json` already rewrites every path to `index.html`).
 
-```bash
-ng e2e
-```
+## Accessibility and i18n
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Skip link, landmarks (`banner`, `navigation`, `main`, `contentinfo`), labelled icon buttons, `aria-current` in the
+menu, live regions for results and errors, status shown with text and color. Texts are in `public/i18n/en.json` and
+`public/i18n/es.json`; the selected language is also sent to the API in `Accept-Language`, so API messages, alerts,
+recommendations and plan features arrive in the same language.
 
-## Additional Resources
+## End-to-end test
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+`e2e/e2e.mjs` (Playwright) runs in GitHub Actions against the real API with demo data: guards and roles, sign-in
+attempts, inventory with 32 decimals, sale blocked by an expired supply, sale and void, ML forecast, recommendations,
+alerts delivery, Spanish, team, plans, sign-up and password recovery.

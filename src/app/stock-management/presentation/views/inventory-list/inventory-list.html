@@ -1,0 +1,57 @@
+<section class="page">
+  <header class="page-header">
+    <div><h1>{{ 'inventory.title' | translate }}</h1><p>{{ 'inventory.description' | translate }}</p></div>
+    <button mat-flat-button type="button" (click)="openForm()"><mat-icon>add</mat-icon>{{ 'inventory.new' | translate }}</button>
+  </header>
+  @if (store.loading()) { <mat-progress-bar mode="indeterminate" [attr.aria-label]="'common.loading' | translate"/> }
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="store.items()" [attr.aria-label]="'inventory.table-label' | translate">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.item' | translate }}</th>
+        <td mat-cell *matCellDef="let item">
+          <span class="name"><strong>{{ item.name }}</strong>
+            @if (store.preferredLotIds().has(item.id)) { <span class="lot">{{ 'inventory.lot-preferred' | translate }}</span> }
+            <span class="muted">{{ 'inventory.stock-value' | translate: {value: (item.stockValue | money)} }}</span></span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.quantity' | translate }}</th>
+        <td mat-cell *matCellDef="let item">{{ item.quantity | quantity: item.unit }}</td>
+      </ng-container>
+      <ng-container matColumnDef="minThreshold">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.min-threshold' | translate }}</th>
+        <td mat-cell *matCellDef="let item">{{ item.minThreshold | quantity: item.unit }}</td>
+      </ng-container>
+      <ng-container matColumnDef="storage">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.storage' | translate }}</th>
+        <td mat-cell *matCellDef="let item">{{ 'inventory.storage.' + item.storageType | translate }}</td>
+      </ng-container>
+      <ng-container matColumnDef="expires">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.expires' | translate }}</th>
+        <td mat-cell *matCellDef="let item">{{ item.expirationDate | localDate }}
+          @if (item.isExpiringSoon) { <mat-icon inline class="warning" [matTooltip]="'dashboard.expiring-soon' | translate">schedule</mat-icon> }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.status' | translate }}</th>
+        <td mat-cell *matCellDef="let item"><app-stock-status-tag [status]="item.status"/></td>
+      </ng-container>
+      <ng-container matColumnDef="unitCost">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.unit-price' | translate }}</th>
+        <td mat-cell *matCellDef="let item">{{ item.unitCost | money }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef><span class="visually-hidden">{{ 'common.actions' | translate }}</span></th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button type="button" (click)="openForm(item)" [attr.aria-label]="'common.edit-item' | translate: {name: item.name}"
+                  [matTooltip]="'common.edit' | translate"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button type="button" (click)="remove(item)" [attr.aria-label]="'common.delete-item' | translate: {name: item.name}"
+                  [matTooltip]="'common.delete' | translate"><mat-icon>delete</mat-icon></button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns" [class.expired]="row.isExpired"></tr>
+    </table>
+    @if (store.loaded() && store.items().length === 0) { <p class="empty-state">{{ 'inventory.empty' | translate }}</p> }
+  </div>
+</section>

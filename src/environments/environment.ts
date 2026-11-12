@@ -1,17 +1,20 @@
+/**
+ * Production environment: the StockIA Platform RESTful API (Spring Boot) deployed for the course.
+ * Change platformProviderApiBaseUrl to the URL of your deployment.
+ */
 export const environment = {
   production: true,
-  platformProviderApiBaseUrl: 'https://stockia-mock-api.onrender.com',
+  platformProviderApiBaseUrl: 'https://stockia-platform-api.onrender.com/api/v1',  platformProviderAuthenticationEndpointPath: '/authentication',
+  platformProviderUsersEndpointPath: '/users',
+  platformProviderRestaurantRegistrationsEndpointPath: '/restaurant-registrations',
+  platformProviderRestaurantsEndpointPath: '/restaurants',
   platformProviderPlansEndpointPath: '/plans',
   platformProviderSubscriptionsEndpointPath: '/subscriptions',
-  // Cada integrante agregará aquí las rutas de su bounded context, por ejemplo:
-  platformProviderDemandForecastsEndpointPath: '/demandForecasts',
-  platformProviderDashboardEndpointPath: '/dashboard',
-
-  platformProviderRecommendationsEndpointPath: '/recommendations',
-
-  platformProviderInventoryItemsEndpointPath: '/inventoryItems',
+  platformProviderInventoryItemsEndpointPath: '/inventory-items',
   platformProviderRecipesEndpointPath: '/recipes',
   platformProviderSalesEndpointPath: '/sales',
-  ///
-  apiBaseUrl: 'https://stockia-mock-api.onrender.com/api/v1',
+  platformProviderAlertsEndpointPath: '/alerts',
+  platformProviderDemandForecastsEndpointPath: '/demand-forecasts',
+  platformProviderRecommendationsEndpointPath: '/recommendations',
+  platformProviderDashboardEndpointPath: '/dashboard'
 };

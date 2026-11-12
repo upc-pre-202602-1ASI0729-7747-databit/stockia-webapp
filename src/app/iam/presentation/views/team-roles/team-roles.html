@@ -1,0 +1,88 @@
+<section class="page">
+  <header class="page-header">
+    <div><h1>{{ 'team.title' | translate }}</h1><p>{{ 'team.description' | translate }}</p></div>
+    <button mat-flat-button type="button" (click)="showInvite.set(!showInvite())" [attr.aria-expanded]="showInvite()">
+      <mat-icon>person_add</mat-icon>{{ 'team.invite' | translate }}
+    </button>
+  </header>
+
+  @if (showInvite()) {
+    <mat-card appearance="outlined">
+      <mat-card-header><mat-card-title>{{ 'team.invite-title' | translate }}</mat-card-title></mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="invite()" novalidate>
+          <div class="invite">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'fields.full-name' | translate }}</mat-label>
+              <input matInput formControlName="fullName" required>
+              <mat-error>{{ form.controls.fullName | errorMessage }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'fields.email' | translate }}</mat-label>
+              <input matInput type="email" formControlName="email" required [placeholder]="'placeholders.team-email' | translate">
+              <mat-error>{{ form.controls.email | errorMessage }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'fields.role' | translate }}</mat-label>
+              <mat-select formControlName="role">
+                @for (role of roles; track role) { <mat-option [value]="role">{{ 'iam.roles.' + role | translate }}</mat-option> }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <p class="muted">{{ 'team.temporary-password' | translate: {password: 'stockia123'} }}</p>
+          <div class="form-actions">
+            <button mat-button type="button" (click)="showInvite.set(false)">{{ 'common.cancel' | translate }}</button>
+            <button mat-flat-button type="submit" [disabled]="inviting()">{{ 'team.send-invite' | translate }}</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="iamStore.users()" [attr.aria-label]="'team.table-label' | translate">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ 'fields.full-name' | translate }}</th>
+        <td mat-cell *matCellDef="let user">
+          <span class="name"><strong>{{ user.fullName }} @if (isSelf(user)) { <span class="tag tag-info">{{ 'team.you' | translate }}</span> }</strong>
+            <span class="muted">{{ user.email }}</span></span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>{{ 'fields.role' | translate }}</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="role-select">
+            <mat-select [value]="user.role" [disabled]="isSelf(user)" (selectionChange)="changeRole(user, $event.value)"
+                        [attr.aria-label]="'team.role-of' | translate: {name: user.fullName}">
+              @for (role of roles; track role) { <mat-option [value]="role">{{ 'iam.roles.' + role | translate }}</mat-option> }
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>{{ 'inventory.columns.status' | translate }}</th>
+        <td mat-cell *matCellDef="let user">
+          @if (user.locked) {
+            <span class="tag tag-danger" [matTooltip]="'team.locked-hint' | translate"><mat-icon inline>lock</mat-icon>{{ 'team.locked' | translate }}</span>
+          }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef><span class="visually-hidden">{{ 'common.actions' | translate }}</span></th>
+        <td mat-cell *matCellDef="let user">
+          @if (user.locked) {
+            <button mat-stroked-button type="button" (click)="unlock(user)" [attr.aria-label]="'team.unlock-of' | translate: {name: user.fullName}">
+              <mat-icon>lock_open</mat-icon>{{ 'team.unlock' | translate }}</button>
+          }
+          @if (!isSelf(user)) {
+            <button mat-icon-button type="button" (click)="remove(user)" [attr.aria-label]="'team.remove-of' | translate: {name: user.fullName}"
+                    [matTooltip]="'team.remove-title' | translate"><mat-icon>person_remove</mat-icon></button>
+          }
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+    @if (!iamStore.loadingUsers() && iamStore.users().length === 0) { <p class="empty-state">{{ 'team.empty' | translate }}</p> }
+  </div>
+</section>
