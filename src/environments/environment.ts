@@ -5,7 +5,8 @@
 export const environment = {
   production: true,
   platformProviderApiBaseUrl: 'https://stockia-platform-api-ycil.onrender.com/api/v1',
-  platformProviderAuthenticationEndpointPath: '/authentication',  
+  platformProviderAuthenticationEndpointPath: '/authentication',
+  platformProviderUsersEndpointPath: '/users',
   platformProviderRestaurantRegistrationsEndpointPath: '/restaurant-registrations',
   platformProviderRestaurantsEndpointPath: '/restaurants',
   platformProviderPlansEndpointPath: '/plans',
