@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, 'feature/**', 'release/**', 'hotfix/**']
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build the web application
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Lint
+        run: npx ng lint
+      - name: Production build
+        run: npx ng build
+
+  e2e:
+    name: End-to-end test against the StockIA Platform API
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check out the StockIA Platform API
+        uses: actions/checkout@v5
+        with:
+          repository: upc-pre-202602-1ASI0729-7747-databit/stockia-platform-api
+          ref: ${{ vars.PLATFORM_REF || 'main' }}
+          path: platform
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: platform/pom.xml
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Start the API (H2 in memory with demo data)
+        working-directory: platform
+        env:
+          SPRING_PROFILES_ACTIVE: local
+          STOCKIA_WEATHER_ENABLED: 'false'
+        run: |
+          mvn -B -ntp -DskipTests package
+          nohup java -jar target/stockia-platform.jar > ../api.log 2>&1 &
+      - name: Build and serve the web application (development environment -> localhost:8181)
+        run: |
+          npm ci
+          npx ng build --configuration development
+          nohup node e2e/static-server.mjs dist/stockia-webapp/browser 4200 > web.log 2>&1 &
+          npm install --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Wait for the API
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl -fs http://localhost:8181/api/v1/health > /dev/null; then echo "API is up"; exit 0; fi
+            sleep 3
+          done
+          tail -60 api.log
+          exit 1
+      - name: Run the end-to-end test
+        run: node e2e/e2e.mjs http://localhost:4200
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: |
+            e2e/screenshots/
+            api.log
+          if-no-files-found: ignore
